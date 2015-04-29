@@ -1,0 +1,2853 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='filter' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='65257E27003B79CB'>
+<noteinfo noteid='4d2' unid='E8CC149158BA24B6652578FA004296BF' sequence='470'>
+<created><datetime>20110828T173719,67+0530</datetime></created>
+<modified><datetime>20150428T201104,73+0530</datetime></modified>
+<revised><datetime>20150428T201104,72+0530</datetime></revised>
+<lastaccessed><datetime>20150428T201104,72+0530</datetime></lastaccessed>
+<addedtofile><datetime>20150414T161942,64+0530</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Sindhu Murugan/O=Maargasystems</name></updatedby>
+<wassignedby><name>CN=Sindhu Murugan/O=Maargasystems</name></wassignedby>
+<item name='$POID'><datetime>20140204T114950,22+0530</datetime></item>
+<item name='$TITLE' sign='true'><text>agApproveProDiscount</text></item>
+<item name='$AssistType' sign='true'><number>65413</number></item>
+<item name='$AssistLastRun' sign='true'>
+<rawitemdata type='400'>
+AAAAAAAAAAA=
+</rawitemdata></item>
+<item name='$AssistDocCount' sign='true'><number>0</number></item>
+<item name='$FlagsExt' sign='true'><text/></item>
+<item name='$AssistFlags' sign='true'><text>Es</text></item>
+<item name='$MachineName' sign='true'><text>CN=EMNOTES01/O=UCC</text></item>
+<item name='$AssistTrigger'><text>1</text></item>
+<item name='$AssistInfo' sign='true'>
+<rawitemdata type='11'>
+AQABAAAAAQAKAAAAAAAA1oMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+</rawitemdata></item>
+<item name='$AssistQuery' sign='true'>
+<rawitemdata type='f'>
+gQYAAAAA
+</rawitemdata></item>
+<item name='$Restricted' sign='true'><number>1</number></item>
+<item name='$Flags'><text>fL3S</text></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item>
+<item name='$AssistRunInfo' summary='true'>
+<rawitemdata type='3'>
+BgABAAAACADSGgAAAAAAAAUAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAA/N9PADV+JWXLeTsAJ34lZQAAAAAAAAAAAAAAAAAAAAAAAAAAqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqq
+</rawitemdata></item>
+<item name='$AssistAction' sign='true'>
+<rawitemdata type='10'>
+gQKF/wwAAAAAAAAAAAA=
+</rawitemdata></item>
+<item name='$AgentHScript' summary='false' sign='true'><text>'++LotusScript Development Environment:2:5:(Options):0:74
+
+%REM
+	Agent agentQuerySave
+	Created: Aug 19, 2010 by Gnanasuriyan A
+	@Modified : August-05-2011.
+	@Author   : Krishnamoorthi P
+	Description: Used for calculating final router level
+%END REM
+Option Public
+Option Declare
+
+Use "lsLogActivity"
+Use "fnMailSend"
+Use "lsCommonFunctions"
+
+'++LotusScript Development Environment:2:5:(Forward):0:1
+Declare Sub Initialize()
+Declare Function doApprove(curDoc As NotesDocument,curStage As String)
+Declare Function leStage(curDoc As NotesDocument,sendername As String)
+Declare Function WebMoveAttachment12(doc As NotesDocument, ByVal moveToFieldName As String)
+Declare Function FileTypeXl(fileName As String) As Boolean
+Declare Function submitDocument(curDoc As NotesDocument) 
+Declare Function completeOrder(curDoc As NotesDocument)
+Declare Function calculateFinalRouter(reqdoc As NotesDocument,isRecalculated As Boolean)
+Declare Function calculteFileSize(doc As NotesDocument)
+Declare Function removePWF(curDoc As NotesDocument)
+Declare Function vpApproval(curDoc As NotesDocument)
+Declare Function updateReaderString(readerName As String,curDoc As NotesDocument)
+Declare Function vpRework(curDoc As NotesDocument)
+Declare Function asmApproval(curDoc As NotesDocument)
+Declare Function asmRework(curDoc As NotesDocument)
+Declare Function updateEditHistory(doc As NotesDocument, activity As String,curApprove As String) 
+Declare Function FileTypeJpgPdf(fileName As String) As Boolean
+Declare Function getCanonicalName(personName As Variant) As String
+Declare Function nsmApproval(curDoc As NotesDocument)
+Declare Function nsmRework(curDoc As NotesDocument)
+Declare Function updateReader(readerName As String, requestDoc As NotesDocument)
+Declare Function Approve(curDoc As NotesDocument)
+Declare Function rsmApproval(curDoc As NotesDocument)
+Declare Function rsmRework(curDoc As NotesDocument)
+Declare Function mktgUpload(curDoc As NotesDocument)
+Declare Function updateAuthor(authorName As String, requestDoc As NotesDocument)
+Declare Function mktgRework(curDoc As NotesDocument)
+Declare Function SeresubmitDocument(curDoc As NotesDocument) 
+Declare Function mdApproval(curDoc As NotesDocument)
+Declare Function mdRework(curDoc As NotesDocument)
+Declare Function Reject(curDoc As NotesDocument)
+
+'++LotusScript Development Environment:2:5:(Declarations):0:10
+Dim curDb As NotesDatabase
+Dim finalrouter As String
+Dim currentstage As String
+Dim curSubmitStage As String 
+Dim key As String
+
+Dim rsmName As String
+Dim mktgName As String
+Dim nsmName As String
+Dim vpName As String
+Dim mdName As String
+Dim leName As String
+Dim seName As String
+Dim asmName As String
+Dim ramName As String
+Dim rlmName As String
+Dim areaConfigDoc As NotesDocument
+Dim requestor As String
+Dim docReaders As String
+Dim docAuthors As String
+Dim isRecalculated As String
+Dim prevApprover As String
+Dim asm As String
+
+'Dim clientOpFlag As String
+	
+Const FIELD_STATUS="curStage" 
+Const  FIELD_SubmitStage="SubmitStage"
+'Code ..#2
+Const FIELD_CUR_STAGE="curStage"
+'End....#2
+Const FIELD_BTNSOURCE="btnSource"
+Const FIELD_ROUTING_LEVEL="rlevel"
+Const FIELD_CURRENT_STAGE="curStage"
+Const FIELD_ASM="cAsm"
+Const FIELD_STATUS_MSG="strStatusMsg"
+Const FIELD_SALES_EXE="cSalesEx"
+Const FIELD_RAM_NAME="RAMname"
+
+Const FIELD_NEXT_APPROVER="txtNextApprover"
+Const FIELD_RETURN="$$Return"
+Const FIELD_MODE="mode"
+Const FIELD_CLIENT_OPERATION="Client_Operation"
+Const FIELD_SAVE_OPT="txtOpt_save"
+Const FIELD_RECALCULATION = "Recalculation"
+
+
+'++LotusScript Development Environment:2:2:Initialize:2:10
+	
+Sub Initialize()
+	Dim curDoc As NotesDocument
+	Dim curStatus As String
+	Dim curStage As String
+	Dim rtnAns As Boolean
+	Dim session As New NotesSession
+	Dim statusView As NotesView  
+	Dim viewEntryCol As NotesViewEntryCollection
+	Dim viewEntry As NotesViewEntry
+	Dim mailDoc As NotesDocument
+	Dim btnSource As String
+	Dim flSize As Boolean
+	Dim saveOpt As String
+	Dim stage As String
+	
+	On Error GoTo ErrHandler
+	Set session=New NotesSession
+	Set curDb=session.currentDatabase
+	docReaders=""
+	docAuthors=""
+	
+	Set statusView=curDb.Getview("vwByStatus")
+	
+	If statusView Is Nothing Then
+		Print "The vwByStatus view is null"
+		Exit Sub
+	End If
+	
+	'Get the all the entry from mail inbox
+	Set viewEntryCol=statusView.Allentries
+	
+	If viewEntryCol.Count=0  Then
+		Print "The vwByStatus view  is empty"
+		Exit Sub
+	End If
+	Set viewEntry=ViewEntryCol.Getfirstentry()
+	While Not ViewEntry Is Nothing
+		
+		'Check whether the view entry is document or not
+		If Not viewEntry.Isdocument Then
+			GoTo whileEnd
+		End If
+		'Get the corresponding maildocument from mailview entry
+		Set curDoc=viewEntry.Document
+		
+		If curDoc Is Nothing Then
+			Print "The vwByStatus view entry not contains a document"
+			GoTo whileEnd
+		End If
+		
+		Call curDoc.Replaceitemvalue("SaveOption","1")
+		'prevApprover=curDoc.curUserName(0)
+		
+		curStatus=curDoc.Getitemvalue(FIELD_STATUS)(0)
+		
+		btnSource=curDoc.Getitemvalue(FIELD_BTNSOURCE)(0)					
+		asm=curDoc.casm(0)	
+	
+		If curDoc.ReadyForSchedule(0)="yes" Then
+			If(btnSource="0") Then	
+				Call Approve(curDoc)
+			ElseIf (btnSource="1") Then
+				Call Reject(curDoc)
+			End If	
+		End If
+whileEnd:
+		curDoc.ReadyForSchedule=""
+		Call curDoc.Computewithform(False,False)	
+			Call curDoc.Save(true,False)
+		Set ViewEntry=ViewEntryCol.Getnextentry(ViewEntry)			
+	Wend		
+	Exit Sub
+ErrHandler:
+	MsgBox "Error occured in agent 'agApproveProDiscount' at sub initialize: "+Error+ ": at line number: "+CStr(Erl)+"Error number: "+CStr(Err)
+	Exit Sub
+End Sub
+
+'++LotusScript Development Environment:2:1:doApprove:6:8
+
+%REM
+	Function doApprove
+	Description: Comments for Function
+%END REM
+Function doApprove(curDoc As NotesDocument,curStage As String)
+	On Error GoTo errHandler
+	isRecalculated = curDoc.Getitemvalue(FIELD_RECALCULATION)(0)
+	If(curStage="1") Then
+		Call submitDocument(curDoc)
+	ElseIf(curStage="2") Then
+		Call asmApproval(curDoc)
+	ElseIf(curStage="2.1") Then
+		Call rsmApproval(curDoc)
+		
+	ElseIf(curStage="3") Then
+		Call mktgUpload(curDoc)
+	ElseIf(curStage="4") Then
+		Call nsmApproval(curDoc)
+	ElseIf(curStage="4.1") Then
+		Call nsmRework(curDoc)
+	ElseIf(curStage="5") Then
+		Call vpApproval(curDoc)
+	ElseIf(curStage="5.1") Then
+		Call vpRework(curDoc)
+	ElseIf(curStage="6") Then
+		Call mdApproval(curDoc)
+	ElseIf(curStage="6.1") Then
+		Call mdRework(curDoc)
+	ElseIf(curStage="7") Then
+		Call completeOrder(curDoc)
+	End If	
+	Exit Function
+errHandler:
+	MsgBox "Error in doApprove function: "+Error+ ": at line number: "+CStr(Erl)
+	Exit Function
+End Function
+
+'++LotusScript Development Environment:2:1:leStage:6:8
+%REM
+	@Created  : June-20-2011
+	@Author   : Gnanasuriyan A
+	@Purpose  : Moving document to LE stage....
+%END REM
+Function leStage(curDoc As NotesDocument,sendername As String)
+	On Error GoTo errHandler
+	
+	Call curDoc.Replaceitemvalue(FIELD_CURRENT_STAGE,"7")
+	Call curDoc.Replaceitemvalue(FIELD_STATUS_MSG,"Awaiting Order Entry")
+	Call updateEditHistory(curDoc,"Awaiting Order Entry",leName)
+	Call updateReaderString(seName,curDoc)
+	Call updateReaderString(getCanonicalName(rlmName),curDoc)
+	'Set the authors as LE
+	docAuthors=leName
+	Call updateAuthor(leName, curDoc)
+	Call curDoc.Replaceitemvalue(FIELD_NEXT_APPROVER, leName)
+	Call sendMail(curDoc,leName,"",sendername)
+	Exit Function
+errHandler:
+	MsgBox "Error in leStage function: "+Error+ ": at line number: "+CStr(Erl)
+	Exit Function
+End Function
+
+'++LotusScript Development Environment:2:1:WebMoveAttachment12:1:8
+Function WebMoveAttachment12(doc As NotesDocument, ByVal moveToFieldName As String)
+	On Error GoTo finderror
+	' This function moves a file attached via the Web with the File Upload Control to a rich text field.
+	Dim s As New NotesSession
+	Dim curDba As NotesDatabase
+	Dim tempDir As String
+	Dim v2FileNames As Variant
+	Dim i As Integer
+	Dim attachedFile As NotesEmbeddedObject
+	Dim filePath As String
+	Dim rtItem As NotesRichTextItem
+	Dim SEPView As NotesView
+	Dim SEPDoc As NotesDocument
+	Set CurDb=s.Currentdatabase	
+	Set SEPView=curDb.Getview("vwKeywords(SEP)")
+	
+	Set sEPDoc=SEPView.Getfirstdocument()
+	
+	tempDir =SEPDoc.fldSEP(0) 's.GetEnvironmentString ("Directory",True)
+	
+	' Put a trailing slash at the end of the directory if it is needed
+	If InStr(tempDir, "/") &lt;&gt; 0 And Right(tempDir, 1) &lt;&gt; "/" Then tempDir = tempDir &amp; "/"
+	If InStr(tempDir, "\") &lt;&gt; 0 And Right(tempDir, 1) &lt;&gt; "\" Then tempDir = tempDir &amp; "\"
+	' Get the names of all the attachments (1 or more)
+	v2FileNames = Evaluate("@AttachmentNames", doc)
+	
+	For i = LBound(v2FileNames) To UBound(v2FileNames)
+		
+		If v2FileNames(i) &lt;&gt; "" Then   ' Make sure it's a valid file name
+			Set attachedFile = doc.getAttachment(v2FileNames(i))
+			
+			
+			filePath = tempDir &amp; v2FileNames(i)
+			' Save the file on the server
+			
+			Call attachedFile.extractFile(filePath)
+			
+			If doc.hasItem(moveToFieldName) Then
+				Set rtItem = doc.getFirstItem(moveToFieldName)
+				' Add a couple of lines to the rich text field before re-attaching the file
+				Call rtItem.addNewLine(2)
+			Else
+				
+				Set rtItem = New NotesRichTextItem(doc, moveToFieldName)
+			End If
+			
+			Call rtItem.embedObject(1454, "", filePath)
+			
+			Call attachedFile.Remove()	      
+			'Call Doc.Replaceitemvalue("$File", v2FileNames(i))  
+			Kill filePath
+
+			'     Call doc.save(True,False)
+		End If
+	Next   ' Move on to the next file name
+	Exit Function
+finderror:
+	MsgBox Error &amp; Erl() &amp; "while attaching file"
+	Exit Function
+End Function
+
+'++LotusScript Development Environment:2:1:FileTypeXl:6:8
+
+%REM
+	Function FileTypeXl
+	Description: Comments for Function
+%END REM
+Function FileTypeXl(fileName As String) As Boolean
+	'Error Handler Function 
+	On Error GoTo errHandler
+	
+	If (LCase(StrRightBack(fileName,"."))="xlsx")Or(LCase(StrRightBack(fileName,"."))="xls")Or (LCase(StrRightBack(fileName,"."))="xlsm")Then
+		FileTypeXl=True
+	Else
+		FileTypeXl=False
+	End If
+	
+	Exit Function
+errHandler:
+	Print "Error in function FileTypeXl in an agent agentProjectRequest "+Error+" at line number: "+CStr(Erl)+"Error code: "+CStr(Err)
+	Exit Function 
+End Function
+
+'++LotusScript Development Environment:2:1:submitDocument:7:8
+%REM
+	@Created  : June-20-2011
+	@Author   : Gnanasuriyan A
+	@Purpose  : This function just save the document and sent mail to ASM. 
+				Now currentStage = "Awaiting approval ASM"
+%END REM
+Function submitDocument(curDoc As NotesDocument) 
+	On Error GoTo errHandler
+	
+	'Getting ASM name from document.
+	asmName=curDoc.Getitemvalue(FIELD_ASM)(0)	
+	requestor=curDoc.Getitemvalue("Creator")(0)
+	Call curDoc.Replaceitemvalue("seApDate",CDat(Now()))			
+	Call curDoc.Replaceitemvalue(FIELD_CURRENT_STAGE,"2")
+	Call curDoc.Replaceitemvalue(FIELD_STATUS_MSG,"Awaiting Approval-ASM")	
+	Call updateEditHistory(curDoc, "Document created By SE",seName)
+	Call updateReaderString(getCanonicalName(seName),curDoc)
+	Call updateReaderString(getCanonicalName(asmName),curDoc)
+	Call updateReaderString(getCanonicalName(ramname),curDoc)
+	docAuthors=asmName
+	
+	Call curDoc.Replaceitemvalue(FIELD_NEXT_APPROVER, asmName)
+	CurDoc.Form="NewProjectDiscount"
+	Call CurDoc.save(True,False)
+	Call sendMail(curDoc,asmName,"",seName)
+	Call sendMail(curDoc,"",ramName,seName)	
+	
+	Exit Function
+errHandler:
+	MsgBox "Error in submitDocument function: "+Error+ ": at line number: "+CStr(Erl)
+	Exit Function
+End Function
+
+'++LotusScript Development Environment:2:1:completeOrder:6:8
+%REM
+	@Created  : June-20-2011
+	@Author   : Gnanasuriyan A
+	@Purpose  : Order entry completion process.....
+%END REM
+Function completeOrder(curDoc As NotesDocument)
+	On Error GoTo errHandler
+	Const FIELD_RLM_NAME="RLMname"
+	
+	
+	Call curDoc.Replaceitemvalue(FIELD_CURRENT_STAGE,"8")
+	Call curDoc.Replaceitemvalue(FIELD_STATUS_MSG,"Order Completed")
+	Call curDoc.Replaceitemvalue("leApDate",CDat(Now()))
+	Call updateEditHistory(curDoc, "Order Completed",leName)
+	ramName=areaConfigDoc.Getitemvalue(FIELD_RAM_NAME)(0)
+	rlmName=areaConfigDoc.Getitemvalue(FIELD_RLM_NAME)(0)
+	'Set the reader as LE
+	Call updateReaderString(getCanonicalName(leName),curDoc)
+	Call updateReaderString(getCanonicalName(ramname),curDoc)
+	Call updateReaderString(getCanonicalName(rlmName),curDoc)
+	'Set the author as RAM
+	docAuthors=ramName
+	docAuthors=rlmName
+	Call curDoc.Replaceitemvalue(FIELD_NEXT_APPROVER, ramName)
+	Call sendMail(curDoc,ramName,"",leName)
+	Call sendMail(curDoc,rlmName,"",leName)
+	Exit Function
+errHandler:
+	MsgBox "Error in completeOrder function: "+Error+ ": at line number: "+CStr(Erl)
+	Exit Function
+End Function
+
+'++LotusScript Development Environment:2:1:calculateFinalRouter:8:8
+%REM
+	@Modified : June-20-2011.
+	@Author   : Gnanasuriyan A
+	@Purppose : Calculting final apporver and autogeneration of proposal number.
+		2- ASM 2.1-RSM 4-NSM 5-VP 6-MD 
+%END REM
+
+Function calculateFinalRouter(reqdoc As NotesDocument,isRecalculated As Boolean)
+	
+
+	Set session=New NotesSession
+	Set curDb=session.currentDatabase
+	Dim configPNView As NotesView
+	Dim configPNDoc As NotesDocument
+	Dim docYear As String
+	Dim docPN As String
+	Dim btnSource As String
+	Dim perConfigView As NotesView
+	Dim perConfigDoc As NotesDocument
+	Dim rowcount As Integer
+	Dim columncount As Integer
+	Dim matrix(18,6) As Variant
+	Dim routinglevel As Integer
+	Dim newRoutingLevel As String
+	
+	Const PW_SANWARE="PW Sanware"
+	Const JP_SANWARE="JP Sanware"
+	Const ALL_PRODUCTS="Allied Products PW"
+	Const PWR_TAPS_FITTING="PW Range of Tags and Fitting"
+	Const CRESTIA="Crestia"
+	Const ROCA_SWARE_SC="Roca Sanware + Seat&amp;Cover+Concealed cistern"
+	Const ROCA_TAPS="Roca Taps"
+	
+	Const PARRYWARE_SANWARE_NEW="Parryware Sanware"
+	Const PCS_OWN_NEW="Parryware Crestia Sanware OWN"
+	Const PCS_TRADED_NEW="Parryware Crestia Sanware (Traded)"
+	Const ALL_PARRYWARE_SCC_NEW="Allied - All Parryware Seat &amp; Covers and Cisterns"
+	Const ALLIED_AFSM_NEW="Allied - Furniture, Sinks, Mirrors &amp; Rest All"
+	Const PARRYWARE_FAUCETS_NEW="Parryware Faucets"
+	Const ROCA_SANWARE_NEW="Roca sanware"
+	Const ROCA_FAUCETS_SC_NEW="Roca Faucets + Seat &amp; Covers"
+	Const ROCA_CONCEALED_CISTERN_NEW="Roca Concealed Cistern"
+	Const LAUFEN_NEW="Laufen"
+	Const JP_NEW="JP"
+
+	Const FIELD_AH_PROPOSED="AHProposed"
+	Const FIELD_RSM_PROPOSED="RSMProposed"
+	Const FIELD_NSM_PROPOSED="NSMProposed"
+	Const FIELD_VP_PROPOSED="VPProposed"
+	Const FIELD_MD_PROPOSED="MDProposed"
+	Const FIELD_YEAR="txtYear"
+	Const FIELD_CONFIG_PN="txtConfigPN"
+	Const FIELD_PROPOSAL_NUMBER="txtproposalno"
+	Dim FIELD_DISCOUNT_PWS As String
+	Dim FIELD_DISCOUNT_JPS As String
+	Dim FIELD_DISCOUNT_APS As String
+	Dim FIELD_DISCOUNT_TAPS As String
+	Dim FIELD_DISCOUNT_CGR As String
+	Dim FIELD_DISCOUNT_RST As String
+	Dim FIELD_DISCOUNT_RTS As String
+	
+	Dim FIELD_DISCOUNT_PWS_NEW As String
+	Dim FIELD_DISCOUNT_JPS_NEW As String
+	Dim FIELD_DISCOUNT_APS_NEW As String
+	Dim FIELD_DISCOUNT_TAPS_NEW As String
+	Dim FIELD_DISCOUNT_CGR_NEW As String
+	Dim FIELD_DISCOUNT_RST_NEW As String
+	Dim FIELD_DISCOUNT_RTS_NEW As String
+	Dim FIELD_DISCOUNT_OWN_NEW As String
+	Dim FIELD_DISCOUNT_AFSM_NEW As String
+	Dim FIELD_DISCOUNT_RCC_NEW As String
+	Dim FIELD_DISCOUNT_L_NEW As String
+	
+	If(isRecalculated) Then
+		FIELD_DISCOUNT_PWS="nmadpws"
+		FIELD_DISCOUNT_JPS="nmadjps"
+		FIELD_DISCOUNT_APS="nmadaps"
+		FIELD_DISCOUNT_TAPS="nmadtaps"
+		FIELD_DISCOUNT_CGR="nmadcgr"
+		FIELD_DISCOUNT_RST="nmadrst"
+		FIELD_DISCOUNT_RTS="nmadrts"
+		
+		FIELD_DISCOUNT_PWS_NEW="nmadpws_new"
+		FIELD_DISCOUNT_JPS_NEW="nmadjps_new"
+		FIELD_DISCOUNT_APS_NEW="nmadaps_new"
+		FIELD_DISCOUNT_TAPS_NEW="nmadtaps_new"
+		FIELD_DISCOUNT_CGR_NEW="nmadcgr_new"
+		FIELD_DISCOUNT_RST_NEW="nmadrst_new"
+		FIELD_DISCOUNT_RTS_NEW="nmadrts_new"
+		FIELD_DISCOUNT_OWN_NEW="nmadown_new"
+		FIELD_DISCOUNT_AFSM_NEW="nmadafsm_new"
+		FIELD_DISCOUNT_RCC_NEW="nmadrcc_new"
+		FIELD_DISCOUNT_L_NEW="nmadl_new"
+
+		Call reqdoc.Replaceitemvalue(FIELD_RECALCULATION, "Yes")
+	Else
+		
+		FIELD_DISCOUNT_PWS="nmdpws"
+		FIELD_DISCOUNT_JPS="nmdjps"
+		FIELD_DISCOUNT_APS="nmdaps"
+		FIELD_DISCOUNT_TAPS="nmdtaps"
+		FIELD_DISCOUNT_CGR="nmdcgr"
+		FIELD_DISCOUNT_RST="nmdrst"
+		FIELD_DISCOUNT_RTS="nmdrts"
+		
+		FIELD_DISCOUNT_PWS_NEW="nmdpws_new"
+		FIELD_DISCOUNT_JPS_NEW="nmdjps_new"
+		FIELD_DISCOUNT_APS_NEW="nmdaps_new"
+		FIELD_DISCOUNT_TAPS_NEW="nmdtaps_new"
+		FIELD_DISCOUNT_CGR_NEW="nmdcgr_new"
+		FIELD_DISCOUNT_RST_NEW="nmdrst_new"
+		FIELD_DISCOUNT_RTS_NEW="nmdrts_new"
+		FIELD_DISCOUNT_OWN_NEW="nmdown_new"
+		FIELD_DISCOUNT_AFSM_NEW="nmdafsm_new"
+		FIELD_DISCOUNT_RCC_NEW="nmdrcc_new"
+		FIELD_DISCOUNT_L_NEW="nmdl_new"
+		
+	End If
+	
+	On Error GoTo errHandler
+	
+	'Check the request document status
+	If reqdoc Is Nothing Then
+		'print "Error in document handle"
+		Exit Function
+	End If
+	
+	If Not isRecalculated Then
+		'Proposal Number Generation
+		Set configPNView=curDb.Getview("vwConfigProposalNumber")
+		'Check config view handle
+		If configPNView Is Nothing Then
+			'Msgbox "Configuration view handle is not got"
+			Exit Function
+		End If
+		'Get the proposal number configuration document
+		Set configPNDoc=configPNView.Getfirstdocument()
+		'Check the proposal number configuration document status
+		If configPNDoc Is Nothing Then
+			'Msgbox "Proposal number configuration document is not got"
+			Exit Function
+		End If
+		'Get the year from configuration document
+		docYear=configPNDoc.Getitemvalue(FIELD_YEAR)(0)
+		'Get the document proposal number
+		docPN=configPNDoc.Getitemvalue(FIELD_CONFIG_PN)(0)
+		'Increment docPN value and saved 
+		If reqdoc.txtProposalNo(0)="" Then
+			configPNDoc.txtConfigPN=CStr(CInt(docPN)+1)
+			Call configPNDoc.Save(True,False)
+			docPN=CStr(CInt(docPN)+1)
+			
+			If(Len(docPN)=1) Then
+				Call reqdoc.Replaceitemvalue(FIELD_PROPOSAL_NUMBER,docYear+"-00000"+docPN)
+			ElseIf (Len(docPN)=2) Then
+				Call reqdoc.Replaceitemvalue(FIELD_PROPOSAL_NUMBER,docYear+"-0000"+docPN)
+			ElseIf (Len(docPN)=3) Then
+				Call reqdoc.Replaceitemvalue(FIELD_PROPOSAL_NUMBER,docYear+"-000"+docPN)
+			ElseIf (Len(docPN)=4) Then
+				Call reqdoc.Replaceitemvalue(FIELD_PROPOSAL_NUMBER,docYear+"-00"+docPN)
+			ElseIf (Len(docPN)=5) Then
+				Call reqdoc.Replaceitemvalue(FIELD_PROPOSAL_NUMBER,docYear+"-0"+docPN)
+			ElseIf (Len(docPN)&gt;=6) Then
+				Call reqdoc.Replaceitemvalue(FIELD_PROPOSAL_NUMBER,docYear+"-"+docPN)
+			End If
+			Dim se As String
+			se=reqdoc.csalesex(0)
+			Call updateEditHistory(reqdoc, "Proposal Number Added",se)		
+		End If
+		
+	End If
+
+	'Calculation of Final Approver	
+	Set perConfigView=curDb.Getview("vwDiscountCategory")
+	If perConfigView Is Nothing Then
+		'Msgbox "Error configview handle"
+		Exit Function
+	End If
+	'Get the PWSanware document
+	Set perConfigDoc=perConfigView.Getdocumentbykey(PW_SANWARE,True)
+	If perConfigDoc Is Nothing Then
+		MsgBox "Error in 'PW Sanware' configuration document"
+		Exit Function
+	End If
+	
+	'Get the PWSanware proposed percentage from perConfigDoc
+	
+	rowcount=0
+	columncount=0
+	
+	matrix(rowcount,columncount)=perConfigDoc.Getitemvalue(FIELD_AH_PROPOSED)(0)
+	matrix(rowcount,columncount+1)=perConfigDoc.Getitemvalue(FIELD_RSM_PROPOSED)(0)
+	matrix(rowcount,columncount+2)=perConfigDoc.Getitemvalue(FIELD_NSM_PROPOSED)(0)
+	matrix(rowcount,columncount+3)=perConfigDoc.Getitemvalue(FIELD_VP_PROPOSED)(0)
+	matrix(rowcount,columncount+4)=perConfigDoc.Getitemvalue(FIELD_MD_PROPOSED)(0)
+	rowcount=rowcount+1
+	
+	'Get the JPSanware document
+	Set perConfigDoc=perConfigView.Getdocumentbykey(JP_SANWARE,True)
+	If perConfigDoc Is Nothing Then
+		MsgBox "Error In 'JP Sanware' configuration document"
+		Exit Function
+	End If
+	'Get the JPSanware proposed percentage from perConfigDoc
+	matrix(rowcount,columncount)=perConfigDoc.Getitemvalue(FIELD_AH_PROPOSED)(0)
+	matrix(rowcount,columncount+1)=perConfigDoc.Getitemvalue(FIELD_RSM_PROPOSED)(0)
+	matrix(rowcount,columncount+2)=perConfigDoc.Getitemvalue(FIELD_NSM_PROPOSED)(0)
+	matrix(rowcount,columncount+3)=perConfigDoc.Getitemvalue(FIELD_VP_PROPOSED)(0)
+	matrix(rowcount,columncount+4)=perConfigDoc.Getitemvalue(FIELD_MD_PROPOSED)(0)
+	rowcount=rowcount+1
+	'Get the Allied Products PW document
+	Set perConfigDoc=perConfigView.Getdocumentbykey(ALL_PRODUCTS,True)
+	If perConfigDoc Is Nothing Then
+		MsgBox "Error In 'Allied Products PW' configuration document"
+		Exit Function
+	End If
+	'Get the Allied Products PW proposed percentage from perConfigDoc
+	matrix(rowcount,columncount)=perConfigDoc.Getitemvalue(FIELD_AH_PROPOSED)(0)
+	matrix(rowcount,columncount+1)=perConfigDoc.Getitemvalue(FIELD_RSM_PROPOSED)(0)
+	matrix(rowcount,columncount+2)=perConfigDoc.Getitemvalue(FIELD_NSM_PROPOSED)(0)
+	matrix(rowcount,columncount+3)=perConfigDoc.Getitemvalue(FIELD_VP_PROPOSED)(0)
+	matrix(rowcount,columncount+4)=perConfigDoc.Getitemvalue(FIELD_MD_PROPOSED)(0)
+	rowcount=rowcount+1
+	
+	'Get the PW Range of Taps and Fitting document
+	Set perConfigDoc=perConfigView.Getdocumentbykey(PWR_TAPS_FITTING,True)
+	If perConfigDoc Is Nothing Then
+		MsgBox "Error In 'PW Range of Taps and Fitting' configuration document"
+		Exit Function
+	End If
+	'Get the PW Range of Taps proposed percentage from perConfigDoc
+	matrix(rowcount,columncount)=perConfigDoc.Getitemvalue(FIELD_AH_PROPOSED)(0)
+	matrix(rowcount,columncount+1)=perConfigDoc.Getitemvalue(FIELD_RSM_PROPOSED)(0)
+	matrix(rowcount,columncount+2)=perConfigDoc.Getitemvalue(FIELD_NSM_PROPOSED)(0)
+	matrix(rowcount,columncount+3)=perConfigDoc.Getitemvalue(FIELD_VP_PROPOSED)(0)
+	matrix(rowcount,columncount+4)=perConfigDoc.Getitemvalue(FIELD_MD_PROPOSED)(0)
+	rowcount=rowcount+1
+	
+	'Get the Crestia document
+	Set perConfigDoc=perConfigView.Getdocumentbykey(CRESTIA,True)
+	If perConfigDoc Is Nothing Then
+		MsgBox "Error In 'Crestia configuration' configuration document"
+		Exit Function
+	End If
+	
+	'Get the Crestia proposed percentage from perConfigDoc
+	matrix(rowcount,columncount)=perConfigDoc.Getitemvalue(FIELD_AH_PROPOSED)(0)
+	matrix(rowcount,columncount+1)=perConfigDoc.Getitemvalue(FIELD_RSM_PROPOSED)(0)
+	matrix(rowcount,columncount+2)=perConfigDoc.Getitemvalue(FIELD_NSM_PROPOSED)(0)
+	matrix(rowcount,columncount+3)=perConfigDoc.Getitemvalue(FIELD_VP_PROPOSED)(0)
+	matrix(rowcount,columncount+4)=perConfigDoc.Getitemvalue(FIELD_MD_PROPOSED)(0)
+	rowcount=rowcount+1
+	
+	
+	'Get the Roca Sanware +Seat &amp; Cover+ Conceaied Cistern document
+	Set perConfigDoc=perConfigView.Getdocumentbykey(ROCA_SWARE_SC,True)
+	
+	If perConfigDoc Is Nothing Then
+		MsgBox "Error In 'Roca Sanware +Seat &amp; Cover+ Conceaied Cistern' configuration document"
+		Exit Function
+	End If
+	'Get the Roca Sanware +Seat &amp; Cover+ Conceaied Cistern proposed percentage from perConfigDoc
+	matrix(rowcount,columncount)=perConfigDoc.Getitemvalue(FIELD_AH_PROPOSED)(0)
+	matrix(rowcount,columncount+1)=perConfigDoc.Getitemvalue(FIELD_RSM_PROPOSED)(0)
+	matrix(rowcount,columncount+2)=perConfigDoc.Getitemvalue(FIELD_NSM_PROPOSED)(0)
+	matrix(rowcount,columncount+3)=perConfigDoc.Getitemvalue(FIELD_VP_PROPOSED)(0)
+	matrix(rowcount,columncount+4)=perConfigDoc.Getitemvalue(FIELD_MD_PROPOSED)(0)
+	rowcount=rowcount+1
+	
+	'Get the Roca Taps document
+	Set perConfigDoc=perConfigView.Getdocumentbykey(ROCA_TAPS,True)
+	If perConfigDoc Is Nothing Then
+		MsgBox "Error In 'Roca Taps' configuration document"
+		Exit Function
+	End If
+	
+	'Get the Roca Taps proposed percentage from perConfigDoc
+	matrix(rowcount,columncount)=perConfigDoc.Getitemvalue(FIELD_AH_PROPOSED)(0)
+	matrix(rowcount,columncount+1)=perConfigDoc.Getitemvalue(FIELD_RSM_PROPOSED)(0)
+	matrix(rowcount,columncount+2)=perConfigDoc.Getitemvalue(FIELD_NSM_PROPOSED)(0)
+	matrix(rowcount,columncount+3)=perConfigDoc.Getitemvalue(FIELD_VP_PROPOSED)(0)
+	matrix(rowcount,columncount+4)=perConfigDoc.Getitemvalue(FIELD_MD_PROPOSED)(0)
+	rowcount=rowcount+1
+	
+	'START-------------------------------------------------------------------
+	
+	'Get the Parryware Sanware document
+	Set perConfigDoc=perConfigView.Getdocumentbykey(PARRYWARE_SANWARE_NEW,True)
+	If perConfigDoc Is Nothing Then
+		MsgBox "Error In 'Parryware Sanware' configuration document"
+		Exit Function
+	End If
+	
+	'Get the Parryware Sanware proposed percentage from perConfigDoc
+	matrix(rowcount,columncount)=perConfigDoc.Getitemvalue(FIELD_AH_PROPOSED)(0)
+	matrix(rowcount,columncount+1)=perConfigDoc.Getitemvalue(FIELD_RSM_PROPOSED)(0)
+	matrix(rowcount,columncount+2)=perConfigDoc.Getitemvalue(FIELD_NSM_PROPOSED)(0)
+	matrix(rowcount,columncount+3)=perConfigDoc.Getitemvalue(FIELD_VP_PROPOSED)(0)
+	matrix(rowcount,columncount+4)=perConfigDoc.Getitemvalue(FIELD_MD_PROPOSED)(0)
+	rowcount=rowcount+1
+	
+	'Get the Parryware Crestia Sanware OWN document
+	Set perConfigDoc=perConfigView.Getdocumentbykey(PCS_OWN_NEW,True)
+	If perConfigDoc Is Nothing Then
+		MsgBox "Error In 'Parryware Crestia Sanware OWN' configuration document"
+		Exit Function
+	End If
+	
+	'Get the Parryware Crestia Sanware OWN proposed percentage from perConfigDoc
+	matrix(rowcount,columncount)=perConfigDoc.Getitemvalue(FIELD_AH_PROPOSED)(0)
+	matrix(rowcount,columncount+1)=perConfigDoc.Getitemvalue(FIELD_RSM_PROPOSED)(0)
+	matrix(rowcount,columncount+2)=perConfigDoc.Getitemvalue(FIELD_NSM_PROPOSED)(0)
+	matrix(rowcount,columncount+3)=perConfigDoc.Getitemvalue(FIELD_VP_PROPOSED)(0)
+	matrix(rowcount,columncount+4)=perConfigDoc.Getitemvalue(FIELD_MD_PROPOSED)(0)
+	rowcount=rowcount+1
+	
+	
+	'Get the Parryware Crestia Sanware (Traded) document
+	Set perConfigDoc=perConfigView.Getdocumentbykey(PCS_TRADED_NEW,True)
+	If perConfigDoc Is Nothing Then
+		MsgBox "Error In 'Parryware Crestia Sanware (Traded)' configuration document"
+		Exit Function
+	End If
+	
+	'Get the Parryware Crestia Sanware (Traded) proposed percentage from perConfigDoc
+	matrix(rowcount,columncount)=perConfigDoc.Getitemvalue(FIELD_AH_PROPOSED)(0)
+	matrix(rowcount,columncount+1)=perConfigDoc.Getitemvalue(FIELD_RSM_PROPOSED)(0)
+	matrix(rowcount,columncount+2)=perConfigDoc.Getitemvalue(FIELD_NSM_PROPOSED)(0)
+	matrix(rowcount,columncount+3)=perConfigDoc.Getitemvalue(FIELD_VP_PROPOSED)(0)
+	matrix(rowcount,columncount+4)=perConfigDoc.Getitemvalue(FIELD_MD_PROPOSED)(0)
+	rowcount=rowcount+1
+	
+	
+	'Get the Allied - All Parryware Seat &amp; Covers and Cisterns document
+	Set perConfigDoc=perConfigView.Getdocumentbykey(ALL_PARRYWARE_SCC_NEW,True)
+	If perConfigDoc Is Nothing Then
+		MsgBox "Error In 'Allied - All Parryware Seat &amp; Covers and Cisterns' configuration document"
+		Exit Function
+	End If
+	
+	'Get the Allied - All Parryware Seat &amp; Covers and Cisterns proposed percentage from perConfigDoc
+	matrix(rowcount,columncount)=perConfigDoc.Getitemvalue(FIELD_AH_PROPOSED)(0)
+	matrix(rowcount,columncount+1)=perConfigDoc.Getitemvalue(FIELD_RSM_PROPOSED)(0)
+	matrix(rowcount,columncount+2)=perConfigDoc.Getitemvalue(FIELD_NSM_PROPOSED)(0)
+	matrix(rowcount,columncount+3)=perConfigDoc.Getitemvalue(FIELD_VP_PROPOSED)(0)
+	matrix(rowcount,columncount+4)=perConfigDoc.Getitemvalue(FIELD_MD_PROPOSED)(0)
+	rowcount=rowcount+1
+	
+	'Get the Allied - Furniture, Sinks, Mirrors &amp; Rest All document
+	Set perConfigDoc=perConfigView.Getdocumentbykey(ALLIED_AFSM_NEW,True)
+	If perConfigDoc Is Nothing Then
+		MsgBox "Error In 'Allied - Furniture, Sinks, Mirrors &amp; Rest All' configuration document"
+		Exit Function
+	End If
+	
+	'Get the Allied - Furniture, Sinks, Mirrors &amp; Rest All proposed percentage from perConfigDoc
+	matrix(rowcount,columncount)=perConfigDoc.Getitemvalue(FIELD_AH_PROPOSED)(0)
+	matrix(rowcount,columncount+1)=perConfigDoc.Getitemvalue(FIELD_RSM_PROPOSED)(0)
+	matrix(rowcount,columncount+2)=perConfigDoc.Getitemvalue(FIELD_NSM_PROPOSED)(0)
+	matrix(rowcount,columncount+3)=perConfigDoc.Getitemvalue(FIELD_VP_PROPOSED)(0)
+	matrix(rowcount,columncount+4)=perConfigDoc.Getitemvalue(FIELD_MD_PROPOSED)(0)
+	rowcount=rowcount+1
+	
+	'Get the Parryware Faucets document
+	Set perConfigDoc=perConfigView.Getdocumentbykey(PARRYWARE_FAUCETS_NEW,True)
+	If perConfigDoc Is Nothing Then
+		MsgBox "Error In 'Parryware Faucets' configuration document"
+		Exit Function
+	End If
+	
+	'Get the Parryware Faucets proposed percentage from perConfigDoc
+	matrix(rowcount,columncount)=perConfigDoc.Getitemvalue(FIELD_AH_PROPOSED)(0)
+	matrix(rowcount,columncount+1)=perConfigDoc.Getitemvalue(FIELD_RSM_PROPOSED)(0)
+	matrix(rowcount,columncount+2)=perConfigDoc.Getitemvalue(FIELD_NSM_PROPOSED)(0)
+	matrix(rowcount,columncount+3)=perConfigDoc.Getitemvalue(FIELD_VP_PROPOSED)(0)
+	matrix(rowcount,columncount+4)=perConfigDoc.Getitemvalue(FIELD_MD_PROPOSED)(0)
+	rowcount=rowcount+1
+	
+	
+	'Get the Roca sanware document
+	Set perConfigDoc=perConfigView.Getdocumentbykey(ROCA_SANWARE_NEW,True)
+	If perConfigDoc Is Nothing Then
+		MsgBox "Error In 'Roca sanware' configuration document"
+		Exit Function
+	End If
+	
+	'Get the Roca sanware proposed percentage from perConfigDoc
+	matrix(rowcount,columncount)=perConfigDoc.Getitemvalue(FIELD_AH_PROPOSED)(0)
+	matrix(rowcount,columncount+1)=perConfigDoc.Getitemvalue(FIELD_RSM_PROPOSED)(0)
+	matrix(rowcount,columncount+2)=perConfigDoc.Getitemvalue(FIELD_NSM_PROPOSED)(0)
+	matrix(rowcount,columncount+3)=perConfigDoc.Getitemvalue(FIELD_VP_PROPOSED)(0)
+	matrix(rowcount,columncount+4)=perConfigDoc.Getitemvalue(FIELD_MD_PROPOSED)(0)
+	rowcount=rowcount+1
+	
+	
+	'Get the Roca Faucets + Seat &amp; Covers document
+	Set perConfigDoc=perConfigView.Getdocumentbykey(ROCA_FAUCETS_SC_NEW,True)
+	If perConfigDoc Is Nothing Then
+		MsgBox "Error In 'Roca Faucets + Seat &amp; Covers' configuration document"
+		Exit Function
+	End If
+	
+	'Get the Roca Faucets + Seat &amp; Covers proposed percentage from perConfigDoc
+	matrix(rowcount,columncount)=perConfigDoc.Getitemvalue(FIELD_AH_PROPOSED)(0)
+	matrix(rowcount,columncount+1)=perConfigDoc.Getitemvalue(FIELD_RSM_PROPOSED)(0)
+	matrix(rowcount,columncount+2)=perConfigDoc.Getitemvalue(FIELD_NSM_PROPOSED)(0)
+	matrix(rowcount,columncount+3)=perConfigDoc.Getitemvalue(FIELD_VP_PROPOSED)(0)
+	matrix(rowcount,columncount+4)=perConfigDoc.Getitemvalue(FIELD_MD_PROPOSED)(0)
+	rowcount=rowcount+1
+	
+	
+	'Get the Roca Concealed Cistern document
+	Set perConfigDoc=perConfigView.Getdocumentbykey(ROCA_CONCEALED_CISTERN_NEW,True)
+	If perConfigDoc Is Nothing Then
+		MsgBox "Error In 'Roca Concealed Cistern' configuration document"
+		Exit Function
+	End If
+	
+	'Get the Roca Concealed Cistern proposed percentage from perConfigDoc
+	matrix(rowcount,columncount)=perConfigDoc.Getitemvalue(FIELD_AH_PROPOSED)(0)
+	matrix(rowcount,columncount+1)=perConfigDoc.Getitemvalue(FIELD_RSM_PROPOSED)(0)
+	matrix(rowcount,columncount+2)=perConfigDoc.Getitemvalue(FIELD_NSM_PROPOSED)(0)
+	matrix(rowcount,columncount+3)=perConfigDoc.Getitemvalue(FIELD_VP_PROPOSED)(0)
+	matrix(rowcount,columncount+4)=perConfigDoc.Getitemvalue(FIELD_MD_PROPOSED)(0)
+	rowcount=rowcount+1
+	
+	
+	'Get the Laufen document
+	Set perConfigDoc=perConfigView.Getdocumentbykey(LAUFEN_NEW,True)
+	If perConfigDoc Is Nothing Then
+		MsgBox "Error In 'Laufen' configuration document"
+		Exit Function
+	End If
+	
+	'Get the Laufen proposed percentage from perConfigDoc
+	matrix(rowcount,columncount)=perConfigDoc.Getitemvalue(FIELD_AH_PROPOSED)(0)
+	matrix(rowcount,columncount+1)=perConfigDoc.Getitemvalue(FIELD_RSM_PROPOSED)(0)
+	matrix(rowcount,columncount+2)=perConfigDoc.Getitemvalue(FIELD_NSM_PROPOSED)(0)
+	matrix(rowcount,columncount+3)=perConfigDoc.Getitemvalue(FIELD_VP_PROPOSED)(0)
+	matrix(rowcount,columncount+4)=perConfigDoc.Getitemvalue(FIELD_MD_PROPOSED)(0)
+	rowcount=rowcount+1
+	
+	'Get the JP document
+	Set perConfigDoc=perConfigView.Getdocumentbykey(JP_NEW,True)
+	If perConfigDoc Is Nothing Then
+		MsgBox "Error In 'JP' configuration document"
+		Exit Function
+	End If
+	
+	'Get the JP proposed percentage from perConfigDoc
+	matrix(rowcount,columncount)=perConfigDoc.Getitemvalue(FIELD_AH_PROPOSED)(0)
+	matrix(rowcount,columncount+1)=perConfigDoc.Getitemvalue(FIELD_RSM_PROPOSED)(0)
+	matrix(rowcount,columncount+2)=perConfigDoc.Getitemvalue(FIELD_NSM_PROPOSED)(0)
+	matrix(rowcount,columncount+3)=perConfigDoc.Getitemvalue(FIELD_VP_PROPOSED)(0)
+	matrix(rowcount,columncount+4)=perConfigDoc.Getitemvalue(FIELD_MD_PROPOSED)(0)
+	rowcount=rowcount+1
+	
+	
+	'END---------------------------------------------------------------------
+	
+	
+	
+	rowcount=0
+	columncount=5
+	'Get the discount percentage submited by Sales executive
+	matrix(rowcount,columncount)= reqdoc.Getitemvalue(FIELD_DISCOUNT_PWS)(0)
+	matrix(rowcount+1,columncount)= reqdoc.Getitemvalue(FIELD_DISCOUNT_JPS)(0)
+	matrix(rowcount+2,columncount)= reqdoc.Getitemvalue(FIELD_DISCOUNT_APS)(0)
+	matrix(rowcount+3,columncount)= reqdoc.Getitemvalue(FIELD_DISCOUNT_TAPS)(0)
+	matrix(rowcount+4,columncount)= reqdoc.Getitemvalue(FIELD_DISCOUNT_CGR)(0)
+	matrix(rowcount+5,columncount)= reqdoc.Getitemvalue(FIELD_DISCOUNT_RST)(0)
+	matrix(rowcount+6,columncount)= reqdoc.Getitemvalue(FIELD_DISCOUNT_RTS)(0)
+	
+	matrix(rowcount+7,columncount)= reqdoc.Getitemvalue(FIELD_DISCOUNT_PWS_NEW)(0)
+	matrix(rowcount+8,columncount)= reqdoc.Getitemvalue(FIELD_DISCOUNT_OWN_NEW)(0)
+	matrix(rowcount+9,columncount)= reqdoc.Getitemvalue(FIELD_DISCOUNT_APS_NEW)(0)
+	matrix(rowcount+10,columncount)= reqdoc.Getitemvalue(FIELD_DISCOUNT_TAPS_NEW)(0)
+	matrix(rowcount+11,columncount)= reqdoc.Getitemvalue(FIELD_DISCOUNT_AFSM_NEW)(0)
+	matrix(rowcount+12,columncount)= reqdoc.Getitemvalue(FIELD_DISCOUNT_CGR_NEW)(0)
+	matrix(rowcount+13,columncount)= reqdoc.Getitemvalue(FIELD_DISCOUNT_RST_NEW)(0)
+	matrix(rowcount+14,columncount)= reqdoc.Getitemvalue(FIELD_DISCOUNT_RTS_NEW)(0)
+	matrix(rowcount+15,columncount)= reqdoc.Getitemvalue(FIELD_DISCOUNT_RCC_NEW)(0)
+	matrix(rowcount+16,columncount)= reqdoc.Getitemvalue(FIELD_DISCOUNT_L_NEW)(0)
+	matrix(rowcount+17,columncount)= reqdoc.Getitemvalue(FIELD_DISCOUNT_JPS_NEW)(0)
+	
+	'Calculate the individual product routing level
+	For rowcount=0 To 17
+		For columncount=0 To 4
+			If(CDbl(matrix(rowcount,5))&lt;=CDbl(matrix(rowcount,columncount))) Then
+				matrix(rowcount,6)=columncount+1
+				GoTo EndInnerWhile
+			End If
+		Next
+		matrix(rowcount,6)=5
+EndInnerWhile:
+	Next
+	
+	rowcount=0
+	columncount=6
+	
+	'Find the highest routing level
+	routinglevel=matrix(rowcount,columncount)
+	For rowcount=1 To columncount
+		If routinglevel&lt;matrix(rowcount,columncount)Then
+			routinglevel=matrix(rowcount,columncount)
+		End If
+	Next
+	If CInt(routinglevel)=1 Then
+		newRoutingLevel="2"
+	ElseIf CInt(routinglevel)=2 Then
+		newRoutingLevel="2.1"
+	Else
+		newRoutingLevel=CStr(routinglevel+1)
+	End If
+	'Set the highest routing level value to rlevel field
+	Call reqdoc.Replaceitemvalue(FIELD_ROUTING_LEVEL,newRoutingLevel)
+	
+	'Set Status as 1 to indicate the highest routing level is calculated
+	Call reqdoc.Replaceitemvalue(FIELD_STATUS,"1")
+	'Save the document
+	Call reqdoc.Save(True,False)
+	Exit Function
+errHandler:
+	Print "Error in method calculateFinalRouter in an agent agentProjectRequest: "+Error+ " at line number: "+CStr(Erl)
+	Exit Function
+End Function
+
+'++LotusScript Development Environment:2:1:calculteFileSize:5:8
+%REM
+	Function calculteFileSize
+	Description: Comments for Function
+%END REM
+Function calculteFileSize(doc As NotesDocument)
+
+	Dim embedObj As NotesEmbeddedObject
+	Dim files As Variant
+	Dim fileCount As Integer
+	Dim jpgpdf As Boolean
+	Dim xltype As Boolean
+	Dim sizeCheck As Boolean
+	
+	'Error Handler Function 
+	On Error GoTo errHandler
+	
+	If doc.Hasembedded=True Then
+		files=Evaluate(|@AttachmentNames|,doc)
+		For fileCount=0 To UBound(files)			
+			Set embedObj=doc.Getattachment(files(fileCount))
+			jpgpdf=FileTypeJpgPdf(files(fileCount))
+			xltype=FileTypeXl(files(fileCount))
+			If  jpgpdf Then
+				If embedObj.FileSize &lt;=716800  Then					
+					calculteFileSize=True					
+				Else					
+					calculteFileSize=False
+					Call embedObj.Remove()
+				End If	
+			ElseIf  xltype=True Then
+				If embedObj.FileSize &lt;=307200  Then					
+					calculteFileSize=True
+				Else 
+					calculteFileSize=False
+					Call embedObj.Remove()
+				End If	
+			Else
+				calculteFileSize=False
+				Call embedObj.Remove()
+			End If
+		Next
+	Else
+		calculteFileSize=True
+	End If
+	Exit Function
+errHandler:
+	Print "Error in function calculateFileSize in an agent agentProjectRequest "+Error+" at line number: "+CStr(Erl)+"Error code: "+CStr(Err)
+	Exit Function 
+End Function
+
+'++LotusScript Development Environment:2:1:removePWF:5:8
+%REM
+	Function removePWF
+	Description: Comments for Function
+%END REM
+Function removePWF(curDoc As NotesDocument)
+	If curDoc.submitStage(0)="ASMRework" Or curDoc.submitstage(0)="RSMRework" Or curDoc.submitstage(0)="MKTGRework" Then
+		Dim rtField As String	
+		'handle errors in case of abrupt termination			
+		rtField="rtpwf"
+		curDoc.RemoveItem("rtpwf")	
+		Call curDoc.save(True,False)
+	End If
+End Function
+
+'++LotusScript Development Environment:2:1:vpApproval:7:8
+
+%REM
+	@Created  : June-20-2011
+	@Author   : Gnanasuriyan A
+	@Purpose  : VP Approval process.....
+%END REM 
+Function vpApproval(curDoc As NotesDocument)
+	On Error GoTo errHandler
+	Call updateEditHistory(curDoc, "Approved by VP",vpname)
+	Call curDoc.Replaceitemvalue("vpApDate",CDat(Now()))
+	If(Trim(finalrouter)=Trim(currentstage)) Then		
+		Call leStage(curDoc,vpname)
+		Call updateReaderString(getCanonicalName(asmName),curDoc)
+		Call updateReaderString(getCanonicalName(rsmName),curDoc)
+		Call updateReaderString(getCanonicalName(mktgName),curDoc)
+		Call updateReaderString(getCanonicalName(nsmName),curDoc)
+		Call updateReaderString(getCanonicalName(vpName),curDoc)
+		Call updateReaderString(getCanonicalName(seName),curDoc)
+		
+		Call sendMail(curDoc,"",asmname,vpname)
+		Call sendMail(curDoc,"",rsmname,vpname)
+		Call sendMail(curDoc,"",mktgname,vpname)
+		Call sendMail(curDoc,"",nsmname,vpname)
+		Call sendMail(curDoc,"",vpname,vpname)
+		Call sendMail(curDoc,"",sename,vpname)	
+	Else
+		'Set the reader as VP  
+		Call updateReaderString(getCanonicalName(mdName),curDoc)
+		Call updateReaderString(getCanonicalName(vpName),curDoc)
+		Call curDoc.Replaceitemvalue(FIELD_CURRENT_STAGE,"6")
+		Call curDoc.Replaceitemvalue(FIELD_STATUS_MSG,"Awaiting Approval-MD")
+		'Set the author as MD
+		docAuthors=mdName
+		Call curDoc.Replaceitemvalue(FIELD_NEXT_APPROVER, mdName)
+		Call sendMail(curDoc,mdName,"",vpname)
+	End If
+	Exit Function
+errHandler:
+	MsgBox "Error in vpApproval function: "+Error+ ": at line number: "+CStr(Erl)
+	Exit Function
+End Function
+
+'++LotusScript Development Environment:2:1:updateReaderString:7:8
+
+
+%REM
+	Function updateReader
+	Description: Comments for Function
+%END REM
+Function updateReaderString(readerName As String,curDoc As NotesDocument)
+	
+	
+	On Error GoTo ErrHandler
+	
+	docReaders=curDoc.getItemValue("bufferItem")(0)
+	
+	If Trim(docReaders) &lt;&gt;"" Then
+		If Trim(readerName)&lt;&gt;"" Then	docReaders=docReaders+";"+readerName
+	Else
+		If Trim(readerName)&lt;&gt;"" Then	docReaders=readerName
+	End If
+	
+	Call curDoc.replaceItemValue("bufferItem",docReaders)
+	
+	Exit Function
+errHandler:
+	Print "Error in function updateReaderString in an agent agentProjectRequest "+Error+" at line number: "+CStr(Erl)+"Error code: "+CStr(Err)
+	Exit Function 
+End Function
+
+'++LotusScript Development Environment:2:1:vpRework:7:8
+
+%REM
+	@Created  : November-16-2011
+	@Author   : Vijayakumar O
+	@Purpose  : VP Rework process.....
+%END REM 
+Function vpRework(curDoc As NotesDocument)
+	On Error GoTo errHandler
+
+	Call updateEditHistory(curDoc, "Reworked by VP",vpName)
+	'Set the reader as nsm
+	Call updateReaderString(getCanonicalName(nsmName),curDoc)
+	Call updateReaderString(getCanonicalName(vpname),curDoc)
+	Call curDoc.Replaceitemvalue(FIELD_CURRENT_STAGE,"6.1")
+	Call curDoc.Replaceitemvalue(FIELD_STATUS_MSG,"Awaiting NSM approval After VP-Rework")
+	'Set the author as nsm
+	docAuthors=nsmname
+	Call curDoc.Replaceitemvalue(FIELD_NEXT_APPROVER, nsmname)
+	'Call curDoc.save(True,False)		
+	Call sendMail(curDoc,nsmname,"",vpname)	
+	
+	Exit Function
+errHandler:
+	MsgBox "Error in VpRework function: "+Error+ ": at line number: "+CStr(Erl)
+	Exit Function
+End Function
+
+'++LotusScript Development Environment:2:1:asmApproval:8:8
+
+
+%REM
+	@Created  : June-20-2011
+	@Author   : Gnanasuriyan A
+	@Purpose  : VP Approval Process.......
+%END REM
+Function asmApproval(curDoc As NotesDocument)
+	
+	On Error GoTo errHandler
+	Dim asm As String
+	asm=curDoc.casm(0)
+	Call updateEditHistory(curDoc, "Approved by ASM",asm)
+	'Set the reader as ASM 		
+	Call curDoc.Replaceitemvalue("asmApDate",CDat(Now()))
+	If(Trim(finalrouter)=Trim(currentstage)) Then
+		Call updateReaderString(getCanonicalName(seName),curDoc)
+		Call updateReaderString(getCanonicalName(asmname),curDoc)
+		Call leStage(curDoc,asmname)
+		curDoc.Prestatus="asmapproved"	
+		Call curDoc.save(True,False)
+		Call SendMail(curDoc,"",sename,asm)		
+	Else
+		Call updateReaderString(getCanonicalName(rsmName),curDoc)
+		Call updateReaderString(getCanonicalName(asm),curDoc)
+		Call curDoc.Replaceitemvalue(FIELD_CURRENT_STAGE,"2.1")
+		Call curDoc.Replaceitemvalue(FIELD_STATUS_MSG,"Awaiting Approval-RSM")
+		'Set the author as RSM 
+		docAuthors=rsmName
+		Call curDoc.Replaceitemvalue(FIELD_NEXT_APPROVER, rsmName)
+		Call sendMail(curDoc,rsmName,"",asm)
+	End If
+	Exit Function
+errHandler:
+	MsgBox "Error in asmApproval function: "+Error+ ": at line number: "+CStr(Erl)
+	Exit Function
+End Function 
+
+'++LotusScript Development Environment:2:1:asmRework:6:8
+%REM
+	@Created  : November-16-2011
+	@Author   : Vijayakumar O
+	@Purpose  : Asm Rework Process.......
+%END REM
+Function asmRework(curDoc As NotesDocument)
+On Error GoTo errHandler
+	Call updateEditHistory(curDoc, "Reworked by ASM",asmName)
+	'Set the reader as se 
+	Call updateReaderString(getCanonicalName(seName),curDoc)
+	Call updateReaderString(getCanonicalName(asmName),curDoc)
+		Call curDoc.Replaceitemvalue(FIELD_CURRENT_STAGE,"2.2")
+		Call curDoc.Replaceitemvalue(FIELD_STATUS_MSG,"Awaiting SE submission after ASM Rework")
+		'Set the author as se
+		docAuthors=seName
+		Call curDoc.Replaceitemvalue(FIELD_NEXT_APPROVER, seName)
+	curDoc.Form="webfrmNewProjectDiscount"
+	Call curDoc.save(True,False)	
+		'Call curDoc.save(True,False)		
+		Call sendMail(curDoc,seName,"",asmName)	
+	Call removePWF(curDoc)
+	Exit Function
+errHandler:
+	MsgBox "Error in rsmApproval function: "+Error+ ": at line number: "+CStr(Erl)
+	Exit Function
+End Function
+
+'++LotusScript Development Environment:2:1:updateEditHistory:1:8
+Function updateEditHistory(doc As NotesDocument, activity As String,curApprove As String) 
+	'******************************************************************************************
+	'@Author:	Karthikeyan A
+	'@Created:	06-Sep-2010
+	'@Type:		Function
+	'@Purpose:	To perform the audit Trial functionality
+	'@Name:		upDateAudit
+	'@Param:	activity As String - the information that you want to update the audit trial with
+	'@Param:	isWebTriggered As boolean - true : indicates the function is triggered from web
+	'			and false: indicates other wise 
+	'@Update History:
+	'******************************************************************************************
+
+	'declare all variables and objects necessary for further manipulation
+	Dim session As New NotesSession
+	Dim sno As String
+	Dim userNames As String
+	Dim dates As String
+	Dim activities As String
+	Dim totalElements As Integer
+	Dim snoArray As Variant
+	Dim currUserName As NotesName
+	Dim currUser As String
+	
+	
+	'handle errors in case of abrupt termination
+	On Error GoTo errHandler
+	
+	
+	Call logUpdate("log initialized")
+	
+	'get the handle for the current user name's object
+	prevApprover=curApprove
+	Set currUserName=session.CreateName(prevApprover)
+	'Set currUserName=session.CreateName(prevApprover)'UserName)
+	
+	'if the current document is a new document the updaet audit and exit
+	If doc.Isnewnote Then
+		Set currUserName=session.CreateName(doc.cSalesEx(0))
+		Call doc.Replaceitemvalue(AUDIT_SNO_FIELD,"1")
+		Call doc.Replaceitemvalue(AUDIT_USERNAME_FIELD,currUserName.Abbreviated)
+		Call doc.Replaceitemvalue(AUDIT_DATE_FIELD,CStr(Now))
+		Call doc.Replaceitemvalue(AUDIT_ACTIVITY_FIELD,activity)		
+	Else
+		'if the document is not a new one then get the existing values and prepend the 
+		'activity on top of them
+		snoArray=doc.GetItemValue(AUDIT_SNO_FIELD)
+		totalElements=UBound(snoArray)+1
+		sno= Join(doc.getItemValue(AUDIT_SNO_FIELD),";")
+		userNames= Join(doc.getItemValue(AUDIT_USERNAME_FIELD),";")
+		dates= Join(doc.getItemValue(AUDIT_DATE_FIELD),";")
+		activities= Join(doc.getItemValue(AUDIT_ACTIVITY_FIELD),";")
+		
+		sno=sno &amp; ";" &amp; CStr(totalElements+1)
+		userNames=currUserName.Abbreviated &amp; ";" &amp; userNames 
+		dates= CStr(Now) &amp; ";" &amp; dates
+		activities= activity &amp; ";" &amp; activities
+		
+		Call doc.Replaceitemvalue(AUDIT_SNO_FIELD,sno)
+		Call doc.Replaceitemvalue(AUDIT_USERNAME_FIELD,userNames)
+		Call doc.Replaceitemvalue(AUDIT_DATE_FIELD,dates)
+		Call doc.Replaceitemvalue(AUDIT_ACTIVITY_FIELD,activities)
+	End If
+	'Call doc.Save(True,False) 
+	Exit Function
+errHandler:
+	'print "Error : " &amp; Error &amp; " occured on line :" &amp; CStr(Err) &amp; " with number :" &amp; CStr(Erl) &amp; " in function updateEditHistory(doc As NotesDocument, activity As String) "
+	Exit Function
+End Function
+
+'++LotusScript Development Environment:2:1:FileTypeJpgPdf:5:8
+%REM
+	Function FileType
+	Description: Comments for Function
+%END REM
+Function FileTypeJpgPdf(fileName As String) As Boolean
+	'Error Handler Function 
+	On Error GoTo errHandler
+	
+	If (LCase(StrRightBack(fileName,"."))="jpg")Or(LCase(StrRightBack(fileName,"."))="jpeg")Or (LCase(StrRightBack(fileName,"."))="pdf")Then
+		FileTypeJpgPdf=True
+	Else
+		FileTypeJpgPdf=False
+	End If
+	Exit Function
+errHandler:
+	Print "Error in function FileTypeJpgPdf in an agent agentProjectRequest "+Error+" at line number: "+CStr(Erl)+"Error code: "+CStr(Err)
+	Exit Function 
+End Function
+
+'++LotusScript Development Environment:2:1:getCanonicalName:7:8
+
+%REM
+	Function getCanonicalName
+	Description: Comments for Function
+%END REM
+
+Function getCanonicalName(personName As Variant) As String
+	Dim readerNotesName As NotesName
+	Set readerNotesName=session.Createname(personName)	
+	getCanonicalName=readerNotesName.Canonical
+End Function
+
+'++LotusScript Development Environment:2:1:nsmApproval:7:8
+%REM
+	@Created  : June-20-2011
+	@Author   : Gnanasuriyan A
+	@Modifird : August-05-2011 By Krishnamoorthi P
+	@Purpose  : Approval process of NSM  
+%END REM
+Function nsmApproval(curDoc As NotesDocument)
+	On Error GoTo errHandler
+	Dim oldFR As String
+	Dim newFR As String		
+	Call updateEditHistory(curDoc, "Approved by NSM",nsmName)
+	'Set the reader as NSM
+		Call curDoc.Replaceitemvalue("nsmApDate",CDat(Now())) 
+	Call updateReaderString(getCanonicalName(vpName),curDoc)
+	Call updateReaderString(getCanonicalName(mktgName),curDoc)
+	Call updateReaderString(getCanonicalName(nsmname),curDoc)
+	oldFR=curDoc.Getitemvalue(FIELD_ROUTING_LEVEL)(0)
+	isRecalculated = curDoc.Getitemvalue(FIELD_RECALCULATION)(0)
+	Call calculateFinalRouter(curDoc,True)	
+		newFR=curDoc.Getitemvalue(FIELD_ROUTING_LEVEL)(0)
+		If( CLng(NewFR)&lt;=CLng(4)) Then
+			Call leStage(curDoc,nsmName)			
+			Call sendMail(curDoc,"",mktgname,nsmName)
+			Call sendMail(curDoc,"",rsmname,nsmName)
+			Call sendMail(curDoc,"",asmname,nsmName)
+			Call sendMail(curDoc,"",sename,nsmName)
+			Exit Function
+		End If
+	
+	Call curDoc.Replaceitemvalue(FIELD_CURRENT_STAGE,"5")
+	Call curDoc.Replaceitemvalue(FIELD_STATUS_MSG,"Awaiting Approval-VP")
+	'Set the author as VP
+	docAuthors=vpName
+	Call curDoc.Replaceitemvalue(FIELD_NEXT_APPROVER, vpName)
+	Call sendMail(curDoc,vpName,mktgName,nsmName)
+	
+	Exit Function
+errHandler:
+	MsgBox "Error in nsmApproval function: "+Error+ ": at line number: "+CStr(Erl)
+	Exit Function
+End Function
+
+'++LotusScript Development Environment:2:1:nsmRework:6:8
+%REM
+	@Modified : August-05-2011.
+	@Author   : Krishnamoorthi P
+	@Purppose : Regarding reworking for NSM process. 
+%END REM
+Function nsmRework(curDoc As NotesDocument)
+	On Error GoTo errHandler
+
+	Call updateEditHistory(curDoc, "Reworked by NSM",nsmName)
+	'Set the reader as RSM 
+	Call updateReaderString(getCanonicalName(mktgName),curDoc)
+	Call updateReaderString(getCanonicalName(nsmname),curDoc)
+	
+		Call curDoc.Replaceitemvalue(FIELD_CURRENT_STAGE,"5.1")
+		Call curDoc.Replaceitemvalue(FIELD_STATUS_MSG,"Awaiting Upload-MKTG After NSM-Rework")
+		'Set the author as MKTG
+		docAuthors=mktgName
+		Call curDoc.Replaceitemvalue(FIELD_NEXT_APPROVER, mktgName)
+		'Call curDoc.save(True,False)		
+		Call sendMail(curDoc,mktgName,"",nsmName)	
+	
+	Exit Function
+errHandler:
+	MsgBox "Error in rsmRework function: "+Error+ ": at line number: "+CStr(Erl)
+	Exit Function
+End Function
+
+'++LotusScript Development Environment:2:1:updateReader:5:8
+%REM
+	Function updateReader
+	Description: Comments for Function
+%END REM
+Function updateReader(readerName As String, requestDoc As NotesDocument)
+	
+	Dim session As New NotesSession
+	Dim readers As Variant
+	Dim readerNotesName As NotesName
+	Dim docReaderItem As NotesItem
+	Dim buffer As String
+	Dim readerArray As Variant
+	Dim iniSize As Integer
+	
+	On Error GoTo ErrHandler
+	
+	readerArray=requestDoc.Getitemvalue("DocumentReader")
+	iniSize=UBound(readerArray)
+	
+	buffer=""
+	readerArray=FullTrim(readerArray)
+	ForAll reader In readerArray
+		buffer=buffer+getCanonicalName(reader)+";"
+	End ForAll
+	
+	Set readerNotesName=New NotesName(readerName)
+	
+	ReDim Preserve readerArray(iniSize+1)
+	buffer=buffer+readerNotesName.Canonical
+	
+	readerArray=ArrayUnique(Split(buffer,";"),0)
+	readerArray=FullTrim(readerArray)
+	Call requestDoc.Replaceitemvalue("DocumentReader", Split(Join(readerArray,";"),";"))
+	Call requestDoc.Computewithform(True,False)
+	
+	Set docReaderItem=requestDoc.Getfirstitem("DocumentReader")
+	
+	docReaderItem.IsReaders=True
+	Exit Function
+	
+errHandler:
+	Print "Error in function updateReader in an agent agentProjectRequest "+Error+" at line number: "+CStr(Erl)+"Error code: "+CStr(Err)
+	Exit Function 
+
+End Function
+
+'++LotusScript Development Environment:2:1:Approve:6:8
+%REM
+	@Modified : June-20-2011.
+	@Author   : Gnanasuriyan A.
+	@Purppose : Regarding discount approval process. 
+%END REM
+Function Approve(curDoc As NotesDocument)
+	Dim session As New NotesSession
+	Dim docReaderItem As NotesItem		
+	On Error GoTo ErrHandler
+	'Getting current database handle....
+	Set curDb=session.Currentdatabase
+	'Getting SE Name from document.... This SE Name act As a key For taking area configuration document....
+	seName=curDoc.Getitemvalue(FIELD_SALES_EXE)(0)
+	asmname=curDoc.getitemvalue(FIELD_ASM)(0)
+	
+	key=seName
+
+	'Getting the area configuration document
+	Set areaConfigDoc=getLookupDoc(key)
+	If areaConfigDoc Is Nothing Then
+		MsgBox "Error in taking hadle of area configuration document....!"
+		Exit Function 
+	End If
+	'Getting RSM,MKTG,NSM,VP,MD,LE and RLM name from area configuration document.
+	rsmName=getRSMName(areaConfigDoc)	
+	mktgName=getMKTGName(areaConfigDoc)
+	nsmName=getNSMName(areaConfigDoc)
+	vpName=getVPName(areaConfigDoc)
+	mdName=getMDName(areaConfigDoc)
+	leName=getLEName(areaConfigDoc)
+	rlmName = getRLMName(areaConfigDoc)
+	ramName = getRamName(areaConfigDoc)
+	
+	
+	'Getting final approver value from document.
+	finalrouter=curDoc.Getitemvalue(FIELD_ROUTING_LEVEL)(0)
+	'Getting current approver value from document.
+	curSubmitStage=curDoc.Getitemvalue(FIELD_SubmitStage)(0)
+	'Call doApprove(curDoc,currentstage)
+	
+	currentstage=curDoc.Getitemvalue(FIELD_STATUS)(0)
+
+	If(curSubmitStage="SESubmit") Then
+		Call submitDocument(curDoc)
+	ElseIf(curSubmitStage="SEResubmit") Then
+		Call SeresubmitDocument(curDoc)
+	ElseIf(curSubmitStage="ASMSubmit") Then
+		Call asmApproval(curDoc)
+	ElseIf(curSubmitStage="ASMRework") Then
+		Call asmRework(curDoc)		
+	ElseIf(curSubmitStage="RSMSubmit") Then
+		Call rsmApproval(curDoc)
+	ElseIf(curSubmitStage="RSMRework") Then
+		Call rsmRework(curDoc)
+	ElseIf(curSubmitStage="MKTGSubmit") Then
+		Call mktgUpload(curDoc)
+	ElseIf(curSubmitStage="MKTGRework") Then
+		Call mktgRework(curDoc)
+	ElseIf(curSubmitStage="NSMSubmit") Then
+		Call nsmApproval(curDoc)
+	ElseIf(curSubmitStage="NSMRework") Then
+		Call nsmRework(curDoc)
+	ElseIf(curSubmitStage="VPSubmit") Then
+		Call vpApproval(curDoc)
+	ElseIf(curSubmitStage="VPRework") Then
+		Call vpRework(curDoc)
+	ElseIf(curSubmitStage="MDSubmit") Then
+		Call mdApproval(curDoc)
+	ElseIf(curSubmitStage="MDRework") Then
+		Call mdRework(curDoc)
+	ElseIf(curSubmitStage="LESubmit") Then
+		Call completeOrder(curDoc)
+	End If	
+	Call updateReader(docReaders, curDoc)
+	Call updateAuthor(docAuthors, curDoc)
+	Exit Function
+ErrHandler:
+	MsgBox "Error in Approve function: "+Error+ ": at line number: "+CStr(Erl)
+	Exit Function
+End Function
+
+'++LotusScript Development Environment:2:1:rsmApproval:6:8
+%REM
+	@Created  : June-20-2011
+	@Author   : Gnanasuriyan A
+	@Purpose  : Approval process of RSM
+%END REM
+Function rsmApproval(curDoc As NotesDocument)
+	On Error GoTo errHandler
+	Call updateEditHistory(curDoc, "Approved by RSM",rsmName)
+	'Set the reader as RSM 
+	Call curDoc.Replaceitemvalue("rsmApDate",CDat(Now()))
+	If(Trim(finalrouter)=Trim(currentstage)) Then
+		Call updateReaderString(getCanonicalName(sename),curDoc)	
+		Call updateReaderString(getCanonicalName(asmname),curDoc)
+		Call leStage(curDoc,rsmname)		
+		curDoc.Prestatus="rsmapproved"
+		Call curDoc.save(True,False)
+		Call sendMail(curDoc,"",asmname,rsmname)
+		Call sendMail(curDoc,"",sename,rsmname)			
+							
+	Else
+		Call updateReaderString(getCanonicalName(mktgName),curDoc)
+		Call updateReaderString(getCanonicalName(rsmname),curDoc)
+		Call curDoc.Replaceitemvalue(FIELD_CURRENT_STAGE,"3")
+		Call curDoc.Replaceitemvalue(FIELD_STATUS_MSG,"Awaiting Upload-MKTG")
+		curDoc.submitstage="RSMSubmit"		
+		'Set the author as MKTG
+		docAuthors=mktgName
+		Call curDoc.Replaceitemvalue(FIELD_NEXT_APPROVER, mktgName)
+		Call curDoc.save(True,False)
+		'Call curDoc.Replaceitemvalue("fldMktg", getCanonicalName(mktgName))
+		Call sendMail(curDoc,mktgName,"",rsmName)	
+	End If
+	Exit Function
+errHandler:
+	MsgBox "Error in rsmApproval function: "+Error+ ": at line number: "+CStr(Erl)
+	Exit Function
+End Function
+
+'++LotusScript Development Environment:2:1:rsmRework:6:8
+%REM
+	@Created  : November-16-2011
+	@Author   : Vijayakumar O
+	@Purpose  : Rework process of RSM
+%END REM
+Function rsmRework(curDoc As NotesDocument)
+On Error GoTo errHandler
+	Call updateEditHistory(curDoc, "Reworked by RSM",rsmName)
+	'Set the reader as RSM 	
+	Call updateReaderString(getCanonicalName(rsmName),curDoc)
+	Call updateReaderString(getCanonicalName(asmName),curDoc)
+		Call curDoc.Replaceitemvalue(FIELD_CURRENT_STAGE,"3.1")
+		Call curDoc.Replaceitemvalue(FIELD_STATUS_MSG,"Awaiting SE submission After RSM-Rework")
+		'Set the author as se
+		docAuthors=seName
+		Call curDoc.Replaceitemvalue(FIELD_NEXT_APPROVER, seName)
+		curDoc.Form="webfrmNewProjectDiscount"
+		Call curDoc.save(True,False)		
+	Call sendMail(curDoc,seName,"",rsmName)
+	Call SendMail(curDoc,"",asmname,rsmName)	
+	Call removePWF(curDoc)
+	Exit Function
+errHandler:
+	MsgBox "Error in rsmApproval function: "+Error+ ": at line number: "+CStr(Erl)
+	Exit Function
+End Function
+
+'++LotusScript Development Environment:2:1:mktgUpload:7:8
+
+%REM
+	@Created  : June-20-2011
+	@Author   : Gnanasuriyan A
+	@Purpose  : Approved process of ASM
+%END REM
+Function mktgUpload(curDoc As NotesDocument)
+	On Error GoTo errHandler
+	Call curDoc.Replaceitemvalue(FIELD_CURRENT_STAGE,"4")
+	Call curDoc.Replaceitemvalue("mktgApDate",CDat(Now()))
+	Call curDoc.Replaceitemvalue(FIELD_STATUS_MSG,"Awaiting Approval-NSM")
+	Call updateEditHistory(curDoc, "Uploaded by MKTG",mktgName)
+	'Set the reader as MKTG
+	Call updateReaderString(getCanonicalName(nsmName),curDoc)
+	Call updateReaderString(getCanonicalName(rlmname),curDoc)
+	Call updateReaderString(getCanonicalName(mktgname),curDoc)
+	'Set the author as NSM 	
+	docAuthors=nsmName
+	Call curDoc.Replaceitemvalue(FIELD_NEXT_APPROVER, nsmName)
+	Call sendMail(curDoc,nsmName,"",mktgName)
+	Exit Function
+errHandler:
+	MsgBox "Error in mktgUpload function: "+Error+ ": at line number: "+CStr(Erl)
+	Exit Function
+End Function
+
+'++LotusScript Development Environment:2:1:updateAuthor:3:8
+
+
+Function updateAuthor(authorName As String, requestDoc As NotesDocument)
+	
+	Dim session As New NotesSession
+	Dim authorNotesName As NotesName
+	Dim docAuthorItem As NotesItem
+	
+	On Error GoTo ErrHandler
+	
+	Set authorNotesName=session.Createname(authorName)
+	Call requestDoc.Replaceitemvalue("DocumentAuthor", authorNotesName.canonical)
+	
+	Set docAuthorItem=requestDoc.Getfirstitem("DocumentAuthor")
+	docauthorItem.IsAuthors=True
+	Exit Function
+	
+errHandler:
+	Print "Error in function updateAuthor in an agent agentProjectRequest "+Error+" at line number: "+CStr(Erl)+"Error code: "+CStr(Err)
+	Exit Function 
+	
+End Function
+
+'++LotusScript Development Environment:2:1:mktgRework:7:8
+
+%REM
+	@Created  : November-16-2011
+	@Author   : Vijayakumar O
+	@Purpose  : Rework process of MKTG
+%END REM
+Function mktgRework(curDoc As NotesDocument)
+On Error GoTo errHandler
+	Call updateEditHistory(curDoc, "Reworked by MKTG",mktgName)
+	'Set the reader as rsmname,asmname,mktgname	 
+	Call updateReaderString(getCanonicalName(rsmName),curDoc)
+	Call updateReaderString(getCanonicalName(asmName),curDoc)
+	Call updateReaderString(getCanonicalName(mktgName),curDoc)
+	Call updateReaderString(getCanonicalName(seName),curDoc)
+		Call curDoc.Replaceitemvalue(FIELD_CURRENT_STAGE,"4.1")
+		Call curDoc.Replaceitemvalue(FIELD_STATUS_MSG,"Awaiting SE Submission After MKTG-Rework")
+		'Set the author as sename 
+		docAuthors=seName
+		Call curDoc.Replaceitemvalue(FIELD_NEXT_APPROVER, seName)
+	curDoc.Form="webfrmNewProjectDiscount"		
+     Call curDoc.save(True,False)		
+		Call sendMail(curDoc,seName,"",mktgName)	
+	Call sendMail(curDoc,"",asmname,mktgName)
+	Call SendMail(curDoc,"",rsmname,mktgName)
+	Call removePWF(curDoc)
+	Exit Function
+errHandler:
+	MsgBox "Error in rsmApproval function: "+Error+ ": at line number: "+CStr(Erl)
+	Exit Function
+End Function
+
+'++LotusScript Development Environment:2:1:SeresubmitDocument:7:8
+%REM
+	@Created  : June-20-2011
+	@Author   : Gnanasuriyan A
+	@Purpose  : This function just save the document and sent mail to ASM. 
+				Now currentStage = "Awaiting approval ASM"
+%END REM
+Function SeresubmitDocument(curDoc As NotesDocument) 
+	On Error GoTo errHandler
+	
+	'Getting ASM name from document.
+	asmName=curDoc.Getitemvalue(FIELD_ASM)(0)	
+	requestor=curDoc.Getitemvalue("Creator")(0)		
+	isRecalculated = "No"	
+	'Call WebMoveAttachment12(curDoc,"rtpwf")
+	Call calculateFinalRouter(curDoc,False)	
+	Call curDoc.Replaceitemvalue(FIELD_CURRENT_STAGE,"2")
+	Call curDoc.Replaceitemvalue("seApDate",CDat(Now()))
+	Call curDoc.Replaceitemvalue(FIELD_STATUS_MSG,"Awaiting Approval-ASM")	
+	Call updateEditHistory(curDoc,"Resubmitted By  SE",seName)
+	Call updateReaderString(getCanonicalName(seName),curDoc)
+	Call updateReaderString(getCanonicalName(asmName),curDoc)
+	Call updateReaderString(getCanonicalName(ramname),curDoc)
+	docAuthors=asmName
+	Call curDoc.Replaceitemvalue(FIELD_NEXT_APPROVER, asmName)
+	CurDoc.Form="NewProjectDiscount"
+	Call CurDoc.save(True,False)
+	Call sendMail(curDoc,asmName,"",seName)
+	Call sendMail(curDoc,"",ramName,seName)		
+	Exit Function
+errHandler:
+	MsgBox "Error in submitDocument function: "+Error+ ": at line number: "+CStr(Erl)
+	Exit Function
+End Function
+
+'++LotusScript Development Environment:2:1:mdApproval:9:8
+
+
+%REM
+	@Created  : June-20-2011
+	@Author   : Gnanasuriyan A
+	@Modified : August 05 By Krishnamoorthi P
+	@Purpose  : MKTG Upload process........
+%END REM
+Function mdApproval(curDoc As NotesDocument)
+	On Error GoTo errHandler	
+	Call curDoc.Replaceitemvalue(FIELD_CURRENT_STAGE,"7")
+	Call curDoc.Replaceitemvalue(FIELD_STATUS_MSG,"Awaiting Order Entry")
+	Call updateEditHistory(curDoc, "Approved by MD",mdName)
+	'Set the reader as MD
+	Call curDoc.Replaceitemvalue("mdApDate",CDat(Now()))
+	Call updateReaderString(getCanonicalName(leName),curDoc)
+	Call updateReaderString(getCanonicalName(asmName),curDoc)
+	Call updateReaderString(getCanonicalName(rsmName),curDoc)
+	Call updateReaderString(getCanonicalName(mktgName),curDoc)
+	Call updateReaderString(getCanonicalName(nsmName),curDoc)
+	Call updateReaderString(getCanonicalName(vpName),curDoc)
+	'Set the author as LE Update
+	docAuthors=leName
+	Call curDoc.Replaceitemvalue(FIELD_NEXT_APPROVER, leName)	
+	Call leStage(curDoc,mdname)
+	
+	Call SendMail(curDoc,"",sename,mdname)
+	Call SendMail(curDoc,"",asmname,mdname)
+	Call SendMail(curDoc,"",rsmname,mdname)
+	Call SendMail(curDoc,"",mktgname,mdname)
+	Call SendMail(curDoc,"",nsmname,mdname)
+	Call SendMail(curDoc,"",vpname,mdname)	
+	Exit Function
+errHandler:
+	MsgBox "Error in mdApproval function: "+Error+ ": at line number: "+CStr(Erl)
+	Exit Function
+End Function
+
+'++LotusScript Development Environment:2:1:mdRework:7:8
+
+%REM
+	@Created  : November-16-2011
+	@Author   : Vijayakumar O
+	@Purpose  : MD Rework process.....
+%END REM 
+Function mdRework(curDoc As NotesDocument)
+On Error GoTo errHandler
+
+	Call updateEditHistory(curDoc, "Reworked by MD",mdName)
+	'Set the reader as Vp 
+	Call updateReaderString(getCanonicalName(vpName),curDoc)
+	Call updateReaderString(getCanonicalName(mdName),curDoc)
+	Call updateReaderString(getCanonicalName(nsmname),curDoc)
+		Call curDoc.Replaceitemvalue(FIELD_CURRENT_STAGE,"7.1")
+		Call curDoc.Replaceitemvalue(FIELD_STATUS_MSG,"Awaiting NSM Approval After MD-Rework")
+		'Set the author as nsmname
+		docAuthors=nsmName
+		Call curDoc.Replaceitemvalue(FIELD_NEXT_APPROVER, nsmName)
+		Call curDoc.save(True,False)		
+		Call sendMail(curDoc,nsmname,"",mdName)
+	Call sendMail(curDoc,"",vpname,mdName)		
+	Exit Function
+errHandler:
+	MsgBox "Error in rsmApproval function: "+Error+ ": at line number: "+CStr(Erl)
+	Exit Function
+End Function
+
+'++LotusScript Development Environment:2:1:Reject:7:8
+%REM
+	@Author   : Gnanasuriyna A
+	@Modified :20-June-2011
+	@Purpose  : Rejection process od discount tracking systems.
+%END REM
+ 
+Function Reject(curDoc As NotesDocument)
+
+	Dim debug As Boolea</text></item>
+<item name='$AgentHScript' summary='false' sign='true'><text>n
+	Dim session As New NotesSession
+	Dim sender(7) As Variant
+	Dim salesExe As String
+	Dim docReaderItem As NotesItem
+	Dim stage1 As String
+	
+	On Error GoTo ErrHandler
+		
+	Set curDb=session.Currentdatabase
+	'Getting SE Name from document.. That SE Name act As key for getting area configuration document.
+	seName=curDoc.Getitemvalue(FIELD_SALES_EXE)(0)
+	'Get the ASM name from document.
+	asmName=curDoc.Getitemvalue(FIELD_ASM)(0)
+	key=seName
+	Dim keyVal As Variant	
+	'Get the Sales executive name
+	salesExe=curDoc.getItemValue(FIELD_SALES_EXE)(0)
+	'get the area configuration document
+	Set areaConfigDoc=getLookupDoc(key)
+	If areaConfigDoc Is Nothing Then
+		MsgBox "Error in taking handle of area configuration document....!"
+		Exit Function 
+	End If
+	
+	'Getting RSM,NSM,VP,MD,and LE name from area configuration document.
+	rsmName=getRSMName(areaConfigDoc)
+	mktgName=getMKTGName(areaConfigDoc)
+	nsmName=getNSMName(areaConfigDoc)
+	vpName=getVPName(areaConfigDoc)
+	mdName=getMDName(areaConfigDoc)
+	leName=getLEName(areaConfigDoc)
+	
+	'Get the current approver
+	currentstage=curDoc.Getitemvalue(FIELD_CURRENT_STAGE)(0)
+	'Set stage as 9 indicate rejected document
+	Call curDoc.Replaceitemvalue(FIELD_CURRENT_STAGE,"9")
+	'Set the next approver is empty
+	Call curDoc.Replaceitemvalue(FIELD_NEXT_APPROVER, "")
+	'Current stage-2 then send mail to SE
+	stage1=curDoc.Getitemvalue(FIELD_CUR_STAGE)(0)
+	'currentstage=2 then the request rejected by ASM
+	If(currentstage="2") Then
+		Call curDoc.Replaceitemvalue(FIELD_SAVE_OPT, "-1")
+		Call curDoc.Replaceitemvalue(FIELD_STATUS_MSG,"Rejected-ASM")
+		Call updateEditHistory(curDoc, "Rejected by ASM",asmname)
+		'Set ASM is Author
+		Call updateReaderString(asmName,curDoc)
+		docAuthors=seName		
+		Call RejectsendMail(curDoc,seName,"",asmname)
+		
+	'currentstage=2.1 then the request rejected by RSM
+	ElseIf(currentstage="2.1") Then
+		sender(0)=salesExe
+		sender(1)=asmName
+		sender(2)=seName
+		Call curDoc.Replaceitemvalue(FIELD_STATUS_MSG,"Rejected-RSM")
+		Call updateEditHistory(curDoc, "Rejected by RSM",rsmName)
+		'Set the reader as ASM,RSM
+		Call updateReaderString(asmName,curDoc)
+		Call updateReaderString(rsmName,curDoc)
+		'Set the author as SE
+		docAuthors=seName
+		Call RejectsendMail(curDoc,seName,"",rsmName)
+		
+		Call RejectsendMail(curDoc,"",asmname,rsmName)
+		Exit Function
+	
+		'currentstage=3 then the request rejected by MKTG
+	ElseIf(currentstage="3") Then
+		sender(0)=salesExe
+		sender(1)=asmName
+		sender(2)=seName
+		sender(3)=mktgName
+		Call curDoc.Replaceitemvalue(FIELD_STATUS_MSG,"Rejected-MKTG")
+		Call updateEditHistory(curDoc, "Rejected-MKTG",mktgName)
+		'Set the reader as ASM,RSM
+		Call updateReaderString(asmName,curDoc)
+		Call updateReaderString(mktgName,curDoc)
+		'Set the author as SE
+		docAuthors=mktgName
+		Call RejectsendMail(curDoc,seName,"",nsmName)	
+		Exit Function
+	
+	'currentstage=4 then the request rejected by NSM
+	ElseIf(currentstage="4" Or currentStage="4.1" Or CurrentStage="6.1" Or CurrentStage="7.1") Then
+		Call curDoc.Replaceitemvalue(FIELD_STATUS_MSG,"Rejected-NSM")
+		Call updateEditHistory(curDoc, "Rejected by NSM",nsmName)
+		sender(0)=salesExe
+		sender(1)=asmName
+		sender(2)=seName
+		sender(3)=mktgName
+		rsmName=getRSMName(areaConfigDoc)
+		nsmName=getNSMName(areaConfigDoc)
+		If Not(Trim(rsmName)=Trim(nsmName)) Then 
+			sender(4)=rsmName
+			'Set the reader as ASM,NSM
+			Call updateReaderString(asmName,curDoc)
+			Call updateReaderString(nsmName,curDoc)
+			'Set the author as SE
+			docAuthors=seName			
+		End If
+		Call RejectsendMail(curDoc,seName,"",nsmName)
+		
+		Call RejectSendMail(curDoc,"",asmname,nsmname)
+		Call RejectSendMail(curDoc,"",rsmname,nsmname)
+		Call RejectSendMail(curDoc,"",mktgname,nsmname)
+		Exit Function
+	
+	'currentstage=5 then the request rejected by VP
+%REM	
+	ElseIf(currentstage="5") Then
+		Call curDoc.Replaceitemvalue(FIELD_STATUS_MSG,"Rejected-VP")
+		Call updateEditHistory(curDoc, "Rejected by VP",vpName)
+		sender(0)=salesExe
+		sender(1)=asmName
+		sender(2)=mktgName
+		rsmName=getRSMName(areaConfigDoc)
+		nsmName=getNSMName(areaConfigDoc)
+		If Not(Trim(rsmName)=Trim(nsmName)) Then 
+			sender(3)=rsmName
+			sender(4)=nsmName
+			'Set the reader as ASM,RSM,NSM,VP
+			Call updateReaderString(asmName,curDoc)
+			Call updateReaderString(rsmName,curDoc)
+			Call updateReaderString(nsmName,curDoc)
+			Call updateReaderString(vpName,curDoc)
+			'Set the author as SE
+			docAuthors=seName				
+		Else
+			sender(3)=nsmName
+			'Set the reader as ASM,NSM,VP
+			Call updateReaderString(asmName,curDoc)
+			Call updateReaderString(nsmName,curDoc)
+			Call updateReaderString(vpName,curDoc)
+			'Set the author as SE
+			docAuthors=seName	
+		End If
+		Call RejectsendMail(curDoc,seName,"",vpName)
+		Exit Function
+	'currentstage=6 then the request rejected by MD
+	ElseIf(currentstage="6") Then
+		Call curDoc.Replaceitemvalue(FIELD_STATUS_MSG,"Rejected-MD")
+		Call updateEditHistory(curDoc, "Rejected by MD",mdName)
+		sender(0)=salesExe
+		sender(1)=curDoc.Getitemvalue(FIELD_ASM)(0)
+		sender(2)=mktgName
+		rsmName=getRSMName(areaConfigDoc)
+		nsmName=getNSMName(areaConfigDoc)
+		If Not(Trim(rsmName)=Trim(nsmName)) Then 
+			sender(3)=rsmName
+			sender(4)=nsmName
+			sender(5)=vpName
+			'Set the reader as ASM,RSM,NSM,VP,MD
+			Call updateReaderString(asmName,curDoc)
+			Call updateReaderString(nsmName,curDoc)
+			Call updateReaderString(rsmName,curDoc)
+			Call updateReaderString(vpName,curDoc)
+			Call updateReaderString(mdName,curDoc)
+			'Set the author as SE
+			docAuthors=seName			
+		Else
+			sender(3)=nsmName
+			sender(4)=vpName
+			'Set the reader as ASM,NSM,VP,MD
+			Call updateReaderString(asmName,curDoc)
+			Call updateReaderString(nsmName,curDoc)
+			Call updateReaderString(vpName,curDoc)
+			Call updateReaderString(mdName,curDoc)
+			'Set the author as SE
+			docAuthors=seName	
+		End If		
+		
+	
+	Call updateReader("", curDoc)
+	Call updateReader(docAuthors, curDoc)
+	'Set the author as ASM
+	Call updateAuthor(docAuthors, curDoc)
+	Call curDoc.Computewithform(True,False)
+	Call RejectsendMail(curDoc,seName,"",mdName)
+	%END REM
+	End If
+	Exit Function
+ErrHandler:
+	Print "Error in Reject function: "+Error+ ": at line number: "+CStr(Erl)
+	Exit Function
+End Function
+<break/></text></item>
+<item name='$AssistAction_Ex' sign='true'>
+<rawitemdata type='14'>
+gQKF/x/EAAAAABPEAAABAAACTFNPQgQAFAhlbgAABAB8Adc8WAAYADg6vEk4BQAALABAAFwwIDoA
+ACAApAAUADQAhADEAAAAAAAAAAAASQAAABABMDXkAngE0AHcKLAB9CBgAaQpUAE0KyABMDWgAag0
+cAFwF8QCDCeAATgYOAPINBABWATAARA1DQAAAKAuWDmgLrA1AAAAAAAAAABgOGA4AAAAAAAAAADg
+Nlg5ADgAOKAyIDYAAAAAgDaANvgzoDdAN8A4DQAAAEwAXDAAAqgMAAAAAIAHzC8AAAAATAA8L1ww
+XDAAAAAAAAAAAAAAAAAAAAAAEAbgBrQitCL4C/gLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAFAExvdHVzIFByb2R1Y3QAAABWMC4w
+AAAAAAAAAAAAAAAAAAAAAFgAAADXPAAAAAAAADg6AAC8SQAAAAAAAAAAAAABAAAAAAAAAAEAAAAA
+AAAAAQAAAAAAAAAAAAAAIgAAAFczMkklAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAIAAgAAAAAALxJAAADAPwPAAAAAFAABwBCADQAOQA1ADQAMQA4AAAA
+aAADAE4ARQBXAAAAfAAGAEQARQBMAEUAVABFAAAAAADgAAoASQBOAEkAVABJAEEATABJAFoARQAA
+AAAAJAEJAFQARQBSAE0ASQBOAEEAVABFAAAAeAEGAE8AQgBKAEUAQwBUAAAAAABcAwAAAAAAAEwB
+DQBsAHMATABvAGcAQQBjAHQAaQB2AGkAdAB5AAAAoAENAEwAUwBMAE8ARwBBAEMAVABJAFYASQBU
+AFkAAACAAgoAZgBuAE0AYQBpAGwAUwBlAG4AZAAAAAAA/AAKAEYATgBNAEEASQBMAFMARQBOAEQA
+AAAAAMQBEQBsAHMAQwBvAG0AbQBvAG4ARgB1AG4AYwB0AGkAbwBuAHMAAABgAREATABTAEMATwBN
+AE0ATwBOAEYAVQBOAEMAVABJAE8ATgBTAAAA3AEGAEMAVQBSAEQATwBDAAAAAACUAQgAQwBVAFIA
+UwBUAEEARwBFAAAAAAAUAgoAUwBFAE4ARABFAFIATgBBAE0ARQAAAAAAyAIDAEQATwBDAAAASAIP
+AE0ATwBWAEUAVABPAEYASQBFAEwARABOAEEATQBFAAAAMAIIAEYASQBMAEUATgBBAE0ARQAAAAAA
+8AEGAFIARQBRAEQATwBDAAAAAABkAg4ASQBTAFIARQBDAEEATABDAFUATABBAFQARQBEAAAAAACc
+AgoAUgBFAEEARABFAFIATgBBAE0ARQAAAAAA6AIIAEEAQwBUAEkAVgBJAFQAWQAAAAAAqAMKAEMA
+VQBSAEEAUABQAFIATwBWAEUAAAAAABgDCgBQAEUAUgBTAE8ATgBOAEEATQBFAAAAAAC4AgoAUgBF
+AFEAVQBFAFMAVABEAE8AQwAAAAAA/AIKAEEAVQBUAEgATwBSAE4AQQBNAEUAAAAAADgDBQBDAFUA
+UgBEAEIAAABUBA0ATgBPAFQARQBTAEQAQQBUAEEAQgBBAFMARQAAAGgDBgAlAEwAUwBYAEIARQAA
+AAAAlAMLAEYASQBOAEEATABSAE8AVQBUAEUAUgAAANADDABDAFUAUgBSAEUATgBUAFMAVABBAEcA
+RQAAAAAAvAMOAEMAVQBSAFMAVQBCAE0ASQBUAFMAVABBAEcARQAAAAAANAQDAEsARQBZAAAAfAMH
+AFIAUwBNAE4AQQBNAEUAAAAgBAgATQBLAFQARwBOAEEATQBFAAAAAACoBAcATgBTAE0ATgBBAE0A
+RQAAAMQEBgBWAFAATgBBAE0ARQAAAAAADAQGAE0ARABOAEEATQBFAAAAAADkAwYATABFAE4AQQBN
+AEUAAAAAAPgDBgBTAEUATgBBAE0ARQAAAAAAiAYHAEEAUwBNAE4AQQBNAEUAAADkBAcAUgBBAE0A
+TgBBAE0ARQAAAHQEBwBSAEwATQBOAEEATQBFAAAAjAQNAEEAUgBFAEEAQwBPAE4ARgBJAEcARABP
+AEMAAABQBQ0ATgBPAFQARQBTAEQATwBDAFUATQBFAE4AVAAAAGwFCQBSAEUAUQBVAEUAUwBUAE8A
+UgAAAGAGCgBEAE8AQwBSAEUAQQBEAEUAUgBTAAAAAAD4BQoARABPAEMAQQBVAFQASABPAFIAUwAA
+AAAAEAUMAFAAUgBFAFYAQQBQAFAAUgBPAFYARQBSAAAAAADwBAMAQQBTAE0AAAA4BgwARgBJAEUA
+TABEAF8AUwBUAEEAVABVAFMAAAAAACgFCABjAHUAcgBTAHQAYQBnAGUAAAAAALQFEQBGAEkARQBM
+AEQAXwBTAFUAQgBNAEkAVABTAFQAQQBHAEUAAACoBgsAUwB1AGIAbQBpAHQAUwB0AGEAZwBlAAAA
+kAUPAEYASQBFAEwARABfAEMAVQBSAF8AUwBUAEEARwBFAAAAwAcPAEYASQBFAEwARABfAEIAVABO
+AFMATwBVAFIAQwBFAAAAzAUJAGIAdABuAFMAbwB1AHIAYwBlAAAAHAcTAEYASQBFAEwARABfAFIA
+TwBVAFQASQBOAEcAXwBMAEUAVgBFAEwAAAAMBgYAcgBsAGUAdgBlAGwAAAAAAOQGEwBGAEkARQBM
+AEQAXwBDAFUAUgBSAEUATgBUAF8AUwBUAEEARwBFAAAAUAYJAEYASQBFAEwARABfAEEAUwBNAAAA
+zAYEAGMAQQBzAG0AAAAAAEgHEABGAEkARQBMAEQAXwBTAFQAQQBUAFUAUwBfAE0AUwBHAAAAAAAs
+CAwAcwB0AHIAUwB0AGEAdAB1AHMATQBzAGcAAAAAAKQHDwBGAEkARQBMAEQAXwBTAEEATABFAFMA
+XwBFAFgARQAAAPgICABjAFMAYQBsAGUAcwBFAHgAAAAAAAgHDgBGAEkARQBMAEQAXwBSAEEATQBf
+AE4AQQBNAEUAAAAAAOAJBwBSAEEATQBuAGEAbQBlAAAAbAgTAEYASQBFAEwARABfAE4ARQBYAFQA
+XwBBAFAAUABSAE8AVgBFAFIAAABsBw8AdAB4AHQATgBlAHgAdABBAHAAcAByAG8AdgBlAHIAAACM
+BwwARgBJAEUATABEAF8AUgBFAFQAVQBSAE4AAAAAAJgICAAkACQAUgBlAHQAdQByAG4AAAAAANAH
+CgBGAEkARQBMAEQAXwBNAE8ARABFAAAAAAAECAQAbQBvAGQAZQAAAAAANAkWAEYASQBFAEwARABf
+AEMATABJAEUATgBUAF8ATwBQAEUAUgBBAFQASQBPAE4AAAAAAOQIEABDAGwAaQBlAG4AdABfAE8A
+cABlAHIAYQB0AGkAbwBuAAAAAABQCA4ARgBJAEUATABEAF8AUwBBAFYARQBfAE8AUABUAAAAAADQ
+CAsAdAB4AHQATwBwAHQAXwBzAGEAdgBlAAAATAkTAEYASQBFAEwARABfAFIARQBDAEEATABDAFUA
+TABBAFQASQBPAE4AAAC4CA0AUgBlAGMAYQBsAGMAdQBsAGEAdABpAG8AbgAAADQKCQBDAFUAUgBT
+AFQAQQBUAFUAUwAAAKQJBgBSAFQATgBBAE4AUwAAAAAAmAoHAFMARQBTAFMASQBPAE4AAAAYCQwA
+TgBPAFQARQBTAFMARQBTAFMASQBPAE4AAAAAALwJCgBTAFQAQQBUAFUAUwBWAEkARQBXAAAAAAB8
+CwkATgBPAFQARQBTAFYASQBFAFcAAABsCQwAVgBJAEUAVwBFAE4AVABSAFkAQwBPAEwAAAAAAEQN
+GABOAE8AVABFAFMAVgBJAEUAVwBFAE4AVABSAFkAQwBPAEwATABFAEMAVABJAE8ATgAAAAAADAoJ
+AFYASQBFAFcARQBOAFQAUgBZAAAA9AkOAE4ATwBUAEUAUwBWAEkARQBXAEUATgBUAFIAWQAAAAAA
+8AoHAE0AQQBJAEwARABPAEMAAACECgkAQgBUAE4AUwBPAFUAUgBDAEUAAAAgCgYARgBMAFMASQBa
+AEUAAAAAAGAKBwBTAEEAVgBFAE8AUABUAAAARAoFAFMAVABBAEcARQAAAMgLCgBFAFIAUgBIAEEA
+TgBEAEwARQBSAAAAAACsDA8AQwBVAFIAUgBFAE4AVABEAEEAVABBAEIAQQBTAEUAAACwCwcARwBF
+AFQAVgBJAEUAVwAAALQKCgB2AHcAQgB5AFMAdABhAHQAdQBzAAAAAABcCxsAVABoAGUAIAB2AHcA
+QgB5AFMAdABhAHQAdQBzACAAdgBpAGUAdwAgAGkAcwAgAG4AdQBsAGwAAAAMCwoAQQBMAEwARQBO
+AFQAUgBJAEUAUwAAAAAAHAsFAEMATwBVAE4AVAAAAJgLHQBUAGgAZQAgAHYAdwBCAHkAUwB0AGEA
+dAB1AHMAIAB2AGkAZQB3ACAAIABpAHMAIABlAG0AcAB0AHkAAAA0DQ0ARwBFAFQARgBJAFIAUwBU
+AEUATgBUAFIAWQAAANQMCgBJAFMARABPAEMAVQBNAEUATgBUAAAAAAB8DAgAVwBIAEkATABFAEUA
+TgBEAAAAAAAwDAgARABPAEMAVQBNAEUATgBUAAAAAABYDDEAVABoAGUAIAB2AHcAQgB5AFMAdABh
+AHQAdQBzACAAdgBpAGUAdwAgAGUAbgB0AHIAeQAgAG4AbwB0ACAAYwBvAG4AdABhAGkAbgBzACAA
+YQAgAGQAbwBjAHUAbQBlAG4AdAAAAOgMEABSAEUAUABMAEEAQwBFAEkAVABFAE0AVgBBAEwAVQBF
+AAAAAAB0DAoAUwBhAHYAZQBPAHAAdABpAG8AbgAAAAAAnAwBADEAAADEDgwARwBFAFQASQBUAEUA
+TQBWAEEATABVAEUAAAAAABANBABDAEEAUwBNAAAAAAD8DBAAUgBFAEEARABZAEYATwBSAFMAQwBI
+AEUARABVAEwARQAAAAAA4AwDAHkAZQBzAAAAqA4BADAAAABkDQcAQQBQAFAAUgBPAFYARQAAADwO
+BgBSAEUASgBFAEMAVAAAAAAA7A0PAEMATwBNAFAAVQBUAEUAVwBJAFQASABGAE8AUgBNAAAA6A4E
+AFMAQQBWAEUAAAAAABgODABHAEUAVABOAEUAWABUAEUATgBUAFIAWQAAAAAAVA5BAEUAcgByAG8A
+cgAgAG8AYwBjAHUAcgBlAGQAIABpAG4AIABhAGcAZQBuAHQAIAAnAGEAZwBBAHAAcAByAG8AdgBl
+AFAAcgBvAEQAaQBzAGMAbwB1AG4AdAAnACAAYQB0ACAAcwB1AGIAIABpAG4AaQB0AGkAYQBsAGkA
+egBlADoAIAAAAAwPEgA6ACAAYQB0ACAAbABpAG4AZQAgAG4AdQBtAGIAZQByADoAIAAAAAAAeA4O
+AEUAcgByAG8AcgAgAG4AdQBtAGIAZQByADoAIAAAAAAAnA4JAEQATwBBAFAAUABSAE8AVgBFAAAA
+eA8OAFMAVQBCAE0ASQBUAEQATwBDAFUATQBFAE4AVAAAAAAAgA4BADIAAADMDgsAQQBTAE0AQQBQ
+AFAAUgBPAFYAQQBMAAAA8A4DADIALgAxAAAAGA8LAFIAUwBNAEEAUABQAFIATwBWAEEATAAAAJQQ
+AQAzAAAAOA8KAE0ASwBUAEcAVQBQAEwATwBBAEQAAAAAAFQPAQA0AAAAMA8LAE4AUwBNAEEAUABQ
+AFIATwBWAEEATAAAAKgPAwA0AC4AMQAAAJwPCQBOAFMATQBSAEUAVwBPAFIASwAAAIAPAQA1AAAA
+YA8KAFYAUABBAFAAUABSAE8AVgBBAEwAAAAAAMgPAwA1AC4AMQAAAMAQCABWAFAAUgBFAFcATwBS
+AEsAAAAAAOgPAQA2AAAA6BAKAE0ARABBAFAAUABSAE8AVgBBAEwAAAAAAMAPAwA2AC4AMQAAACgQ
+CABNAEQAUgBFAFcATwBSAEsAAAAAAGwQAQA3AAAACBENAEMATwBNAFAATABFAFQARQBPAFIARABF
+AFIAAAA8EB0ARQByAHIAbwByACAAAwD8D/gPAABpAG4AIABkAG8AQQBwAHAAcgBvAHYAZQAgAGYA
+dQBuAGMAdABpAG8AbgA6ACAAAAAgEQcATABFAFMAVABBAEcARQAAAFwRFABBAHcAYQBpAHQAaQBu
+AGcAIABPAHIAZABlAHIAIABFAG4AdAByAHkAAAAAAKAREQBVAFAARABBAFQARQBFAEQASQBUAEgA
+SQBTAFQATwBSAFkAAABsEhIAVQBQAEQAQQBUAEUAUgBFAEEARABFAFIAUwBUAFIASQBOAEcAAAAA
+ABQSEABHAEUAVABDAEEATgBPAE4ASQBDAEEATABOAEEATQBFAAAAAAAIEwwAVQBQAEQAQQBUAEUA
+QQBVAFQASABPAFIAAAAAALwRCABTAEUATgBEAE0AQQBJAEwAAAAAAIgRGwBFAHIAcgBvAHIAIABp
+AG4AIABsAGUAUwB0AGEAZwBlACAAZgB1AG4AYwB0AGkAbwBuADoAIAAAAKgREwBXAEUAQgBNAE8A
+VgBFAEEAVABUAEEAQwBIAE0ARQBOAFQAMQAyAAAAvBIJAEYASQBOAEQARQBSAFIATwBSAAAA0BEB
+AFMAAABYEgYAQwBVAFIARABCAEEAAAAAAOwRBwBUAEUATQBQAEQASQBSAAAA9BELAFYAMgBGAEkA
+TABFAE4AQQBNAEUAUwAAAOATAQBJAAAAQBIMAEEAVABUAEEAQwBIAEUARABGAEkATABFAAAAAAAk
+ExMATgBPAFQARQBTAEUATQBCAEUARABEAEUARABPAEIASgBFAEMAVAAAAGwVCABGAEkATABFAFAA
+QQBUAEgAAAAAAJQSBgBSAFQASQBUAEUATQAAAAAAqBIRAE4ATwBUAEUAUwBSAEkAQwBIAFQARQBY
+AFQASQBUAEUATQAAABwTBwBTAEUAUABWAEkARQBXAAAALBMGAFMARQBQAEQATwBDAAAAAADgEg8A
+dgB3AEsAZQB5AHcAbwByAGQAcwAoAFMARQBQACkAAABUExAARwBFAFQARgBJAFIAUwBUAEQATwBD
+AFUATQBFAE4AVAAAAAAAkBMGAEYATABEAFMARQBQAAAAAAB0EwEALwAAAKQTAQBcAAAAdBQQAEAA
+QQB0AHQAYQBjAGgAbQBlAG4AdABOAGEAbQBlAHMAAAAAABAUDQBHAEUAVABBAFQAVABBAEMASABN
+AEUATgBUAAAAhBULAEUAWABUAFIAQQBDAFQARgBJAEwARQAAAMQTBwBIAEEAUwBJAFQARQBNAAAA
+/BMMAEcARQBUAEYASQBSAFMAVABJAFQARQBNAAAAAABcFAoAQQBEAEQATgBFAFcATABJAE4ARQAA
+AAAAEBULAEUATQBCAEUARABPAEIASgBFAEMAVAAAAEAUBgBSAEUATQBPAFYARQAAAAAAgBQUAHcA
+aABpAGwAZQAgAGEAdAB0AGEAYwBoAGkAbgBnACAAZgBpAGwAZQAAAAAAZBQKAEYASQBMAEUAVABZ
+AFAARQBYAEwAAAAAAJQWAQAuAAAAsBYEAHgAbABzAHgAAAAAAJAUAwB4AGwAcwAAACQWBAB4AGwA
+cwBtAAAAAAA4FT0ARQByAHIAbwByACAAaQBuACAAZgB1AG4AYwB0AGkAbwBuACAARgBpAGwAZQBU
+AHkAcABlAFgAbAAgAGkAbgAgAGEAbgAgAGEAZwBlAG4AdAAgAGEAZwBlAG4AdABQAHIAbwBqAGUA
+YwB0AFIAZQBxAHUAZQBzAHQAIAAAAOgVEQAgAGEAdAAgAGwAaQBuAGUAIABuAHUAbQBiAGUAcgA6
+ACAAAABYFQwARQByAHIAbwByACAAYwBvAGQAZQA6ACAAAAAAAOwWBwBDAHIAZQBhAHQAbwByAAAA
++BUIAHMAZQBBAHAARABhAHQAZQAAAAAAtBUVAEEAdwBhAGkAdABpAG4AZwAgAEEAcABwAHIAbwB2
+AGEAbAAtAEEAUwBNAAAAhBcWAEQAbwBjAHUAbQBlAG4AdAAgAGMAcgBlAGEAdABlAGQAIABCAHkA
+IABTAEUAAAAAANQWBABGAE8AUgBNAAAAAADkFxIATgBlAHcAUAByAG8AagBlAGMAdABEAGkAcwBj
+AG8AdQBuAHQAAAAAAHAWIgBFAHIAcgBvAHIAIABpAG4AIABzAHUAYgBtAGkAdABEAG8AYwB1AG0A
+ZQBuAHQAIABmAHUAbgBjAHQAaQBvAG4AOgAgAAAAAACoFg4ARgBJAEUATABEAF8AUgBMAE0AXwBO
+AEEATQBFAAAAAABkFwcAUgBMAE0AbgBhAG0AZQAAADQXAQA4AAAAoBcPAE8AcgBkAGUAcgAgAEMA
+bwBtAHAAbABlAHQAZQBkAAAArBgIAGwAZQBBAHAARABhAHQAZQAAAAAABBghAEUAcgByAG8AcgAg
+AGkAbgAgAGMAbwBtAHAAbABlAHQAZQBPAHIAZABlAHIAIABmAHUAbgBjAHQAaQBvAG4AOgAgAAAA
+bBgUAEMAQQBMAEMAVQBMAEEAVABFAEYASQBOAEEATABSAE8AVQBUAEUAUgAAAAAAxBcMAEMATwBO
+AEYASQBHAFAATgBWAEkARQBXAAAAAADIGAsAQwBPAE4ARgBJAEcAUABOAEQATwBDAAAAtBcHAEQA
+TwBDAFkARQBBAFIAAADcGQUARABPAEMAUABOAAAAHBgNAFAARQBSAEMATwBOAEYASQBHAFYASQBF
+AFcAAAA4GAwAUABFAFIAQwBPAE4ARgBJAEcARABPAEMAAAAAAOQYCABSAE8AVwBDAE8AVQBOAFQA
+AAAAACAZCwBDAE8ATABVAE0ATgBDAE8AVQBOAFQAAABMGAYATQBBAFQAUgBJAFgAAAAAAAAZDABS
+AE8AVQBUAEkATgBHAEwARQBWAEUATAAAAAAAkBgPAE4ARQBXAFIATwBVAFQASQBOAEcATABFAFYA
+RQBMAAAAyBkKAFAAVwBfAFMAQQBOAFcAQQBSAEUAAAAAAAQfCgBQAFcAIABTAGEAbgB3AGEAcgBl
+AAAAAABwGgoASgBQAF8AUwBBAE4AVwBBAFIARQAAAAAAdBkKAEoAUAAgAFMAYQBuAHcAYQByAGUA
+AAAAAIgaDABBAEwATABfAFAAUgBPAEQAVQBDAFQAUwAAAAAATBkSAEEAbABsAGkAZQBkACAAUABy
+AG8AZAB1AGMAdABzACAAUABXAAAAAAC0GRAAUABXAFIAXwBUAEEAUABTAF8ARgBJAFQAVABJAE4A
+RwAAAAAAuBocAFAAVwAgAFIAYQBuAGcAZQAgAG8AZgAgAFQAYQBnAHMAIABhAG4AZAAgAEYAaQB0
+AHQAaQBuAGcAAAAAAFgaBwBDAFIARQBTAFQASQBBAAAA3BsHAEMAcgBlAHMAdABpAGEAAAD8GQ0A
+UgBPAEMAQQBfAFMAVwBBAFIARQBfAFMAQwAAADwbKwBSAG8AYwBhACAAUwBhAG4AdwBhAHIAZQAg
+ACsAIABTAGUAYQB0ACYAQwBvAHYAZQByACsAQwBvAG4AYwBlAGEAbABlAGQAIABjAGkAcwB0AGUA
+cgBuAAAAIB0JAFIATwBDAEEAXwBUAEEAUABTAAAA/BoJAFIAbwBjAGEAIABUAGEAcABzAAAA4BoV
+AFAAQQBSAFIAWQBXAEEAUgBFAF8AUwBBAE4AVwBBAFIARQBfAE4ARQBXAAAAYBsRAFAAYQByAHIA
+eQB3AGEAcgBlACAAUwBhAG4AdwBhAHIAZQAAAEgdCwBQAEMAUwBfAE8AVwBOAF8ATgBFAFcAAACs
+Gx0AUABhAHIAcgB5AHcAYQByAGUAIABDAHIAZQBzAHQAaQBhACAAUwBhAG4AdwBhAHIAZQAgAE8A
+VwBOAAAARBwOAFAAQwBTAF8AVABSAEEARABFAEQAXwBOAEUAVwAAAAAAaBwiAFAAYQByAHIAeQB3
+AGEAcgBlACAAQwByAGUAcwB0AGkAYQAgAFMAYQBuAHcAYQByAGUAIAAoAFQAcgBhAGQAZQBkACkA
+AAAAAJQdFQBBAEwATABfAFAAQQBSAFIAWQBXAEEAUgBFAF8AUwBDAEMAXwBOAEUAVwAAAGAeMQBB
+AGwAbABpAGUAZAAgAC0AIABBAGwAbAAgAFAAYQByAHIAeQB3AGEAcgBlACAAUwBlAGEAdAAgACYA
+IABDAG8AdgBlAHIAcwAgAGEAbgBkACAAQwBpAHMAdABlAHIAbgBzAAAAyBwPAEEATABMAEkARQBE
+AF8AQQBGAFMATQBfAE4ARQBXAAAA+BwtAEEAbABsAGkAZQBkACAALQAgAEYAdQByAG4AaQB0AHUA
+cgBlACwAIABTAGkAbgBrAHMALAAgAE0AaQByAHIAbwByAHMAIAAmACAAUgBlAHMAdAAgAEEAbABs
+AAAA1B0VAFAAQQBSAFIAWQBXAEEAUgBFAF8ARgBBAFUAQwBFAFQAUwBfAE4ARQBXAAAAaB0RAFAA
+YQByAHIAeQB3AGEAcgBlACAARgBhAHUAYwBlAHQAcwAAANQfEABSAE8AQwBBAF8AUwBBAE4AVwBB
+AFIARQBfAE4ARQBXAAAAAAB0HgwAUgBvAGMAYQAgAHMAYQBuAHcAYQByAGUAAAAAANgeEwBSAE8A
+QwBBAF8ARgBBAFUAQwBFAFQAUwBfAFMAQwBfAE4ARQBXAAAAEB4cAFIAbwBjAGEAIABGAGEAdQBj
+AGUAdABzACAAKwAgAFMAZQBhAHQAIAAmACAAQwBvAHYAZQByAHMAAAAAAEwfGgBSAE8AQwBBAF8A
+QwBPAE4AQwBFAEEATABFAEQAXwBDAEkAUwBUAEUAUgBOAF8ATgBFAFcAAAAAAEQeFgBSAG8AYwBh
+ACAAQwBvAG4AYwBlAGEAbABlAGQAIABDAGkAcwB0AGUAcgBuAAAAAABoHwoATABBAFUARgBFAE4A
+XwBOAEUAVwAAAAAAiB4GAEwAYQB1AGYAZQBuAAAAAAAgHwYASgBQAF8ATgBFAFcAAAAAAJQeAgBK
+AFAAAAAAALweEQBGAEkARQBMAEQAXwBBAEgAXwBQAFIATwBQAE8AUwBFAEQAAACQIAoAQQBIAFAA
+cgBvAHAAbwBzAGUAZAAAAAAA6CISAEYASQBFAEwARABfAFIAUwBNAF8AUABSAE8AUABPAFMARQBE
+AAAAAAC0IgsAUgBTAE0AUAByAG8AcABvAHMAZQBkAAAArB8SAEYASQBFAEwARABfAE4AUwBNAF8A
+UABSAE8AUABPAFMARQBEAAAAAACQHwsATgBTAE0AUAByAG8AcABvAHMAZQBkAAAAICARAEYASQBF
+AEwARABfAFYAUABfAFAAUgBPAFAATwBTAEUARAAAAAwgCgBWAFAAUAByAG8AcABvAHMAZQBkAAAA
+AADwHxEARgBJAEUATABEAF8ATQBEAF8AUABSAE8AUABPAFMARQBEAAAAsCAKAE0ARABQAHIAbwBw
+AG8AcwBlAGQAAAAAAAMA/A/wHwAAGCIKAEYASQBFAEwARABfAFkARQBBAFIAAAAAAEQgBwB0AHgA
+dABZAGUAYQByAAAAYCAPAEYASQBFAEwARABfAEMATwBOAEYASQBHAF8AUABOAAAA7CMLAHQAeAB0
+AEMAbwBuAGYAaQBnAFAATgAAAOQhFQBGAEkARQBMAEQAXwBQAFIATwBQAE8AUwBBAEwAXwBOAFUA
+TQBCAEUAUgAAANwgDQB0AHgAdABwAHIAbwBwAG8AcwBhAGwAbgBvAAAAjCESAEYASQBFAEwARABf
+AEQASQBTAEMATwBVAE4AVABfAFAAVwBTAAAAAAAIIRIARgBJAEUATABEAF8ARABJAFMAQwBPAFUA
+TgBUAF8ASgBQAFMAAAAAADQhEgBGAEkARQBMAEQAXwBEAEkAUwBDAE8AVQBOAFQAXwBBAFAAUwAA
+AAAAYCETAEYASQBFAEwARABfAEQASQBTAEMATwBVAE4AVABfAFQAQQBQAFMAAACAIhIARgBJAEUA
+TABEAF8ARABJAFMAQwBPAFUATgBUAF8AQwBHAFIAAAAAALghEgBGAEkARQBMAEQAXwBEAEkAUwBD
+AE8AVQBOAFQAXwBSAFMAVAAAAAAATCISAEYASQBFAEwARABfAEQASQBTAEMATwBVAE4AVABfAFIA
+VABTAAAAAAAcIxYARgBJAEUATABEAF8ARABJAFMAQwBPAFUATgBUAF8AUABXAFMAXwBOAEUAVwAA
+AAAAUCMWAEYASQBFAEwARABfAEQASQBTAEMATwBVAE4AVABfAEoAUABTAF8ATgBFAFcAAAAAAKwk
+FgBGAEkARQBMAEQAXwBEAEkAUwBDAE8AVQBOAFQAXwBBAFAAUwBfAE4ARQBXAAAAAADkJBcARgBJ
+AEUATABEAF8ARABJAFMAQwBPAFUATgBUAF8AVABBAFAAUwBfAE4ARQBXAAAAuCMWAEYASQBFAEwA
+RABfAEQASQBTAEMATwBVAE4AVABfAEMARwBSAF8ATgBFAFcAAAAAABwkFgBGAEkARQBMAEQAXwBE
+AEkAUwBDAE8AVQBOAFQAXwBSAFMAVABfAE4ARQBXAAAAAACEIxYARgBJAEUATABEAF8ARABJAFMA
+QwBPAFUATgBUAF8AUgBUAFMAXwBOAEUAVwAAAAAAcCQWAEYASQBFAEwARABfAEQASQBTAEMATwBV
+AE4AVABfAE8AVwBOAF8ATgBFAFcAAAAAAMgkFwBGAEkARQBMAEQAXwBEAEkAUwBDAE8AVQBOAFQA
+XwBBAEYAUwBNAF8ATgBFAFcAAAAwJBYARgBJAEUATABEAF8ARABJAFMAQwBPAFUATgBUAF8AUgBD
+AEMAXwBOAEUAVwAAAAAAWCQUAEYASQBFAEwARABfAEQASQBTAEMATwBVAE4AVABfAEwAXwBOAEUA
+VwAAAAAARCQHAG4AbQBhAGQAcAB3AHMAAAA8JQcAbgBtAGEAZABqAHAAcwAAAFQmBwBuAG0AYQBk
+AGEAcABzAAAA5CUIAG4AbQBhAGQAdABhAHAAcwAAAAAAhCQHAG4AbQBhAGQAYwBnAHIAAACYJAcA
+bgBtAGEAZAByAHMAdAAAACAlBwBuAG0AYQBkAHIAdABzAAAAzCULAG4AbQBhAGQAcAB3AHMAXwBu
+AGUAdwAAAAAlCwBuAG0AYQBkAGoAcABzAF8AbgBlAHcAAAAsJgsAbgBtAGEAZABhAHAAcwBfAG4A
+ZQB3AAAA8CUMAG4AbQBhAGQAdABhAHAAcwBfAG4AZQB3AAAAAACQJQsAbgBtAGEAZABjAGcAcgBf
+AG4AZQB3AAAAWCULAG4AbQBhAGQAcgBzAHQAXwBuAGUAdwAAAHQlCwBuAG0AYQBkAHIAdABzAF8A
+bgBlAHcAAAAIJwsAbgBtAGEAZABvAHcAbgBfAG4AZQB3AAAAsCUMAG4AbQBhAGQAYQBmAHMAbQBf
+AG4AZQB3AAAAAADgLwsAbgBtAGEAZAByAGMAYwBfAG4AZQB3AAAAfCYJAG4AbQBhAGQAbABfAG4A
+ZQB3AAAAQCYDAFkAZQBzAAAABCYGAG4AbQBkAHAAdwBzAAAAAAAYJgYAbgBtAGQAagBwAHMAAAAA
+AEAnBgBuAG0AZABhAHAAcwAAAAAAmCYHAG4AbQBkAHQAYQBwAHMAAADsJgYAbgBtAGQAYwBnAHIA
+AAAAAGgmBgBuAG0AZAByAHMAdAAAAAAA0CYGAG4AbQBkAHIAdABzAAAAAABQKAoAbgBtAGQAcAB3
+AHMAXwBuAGUAdwAAAAAAtCYKAG4AbQBkAGoAcABzAF8AbgBlAHcAAAAAAEAoCgBuAG0AZABhAHAA
+cwBfAG4AZQB3AAAAAACUJwsAbgBtAGQAdABhAHAAcwBfAG4AZQB3AAAAeCcKAG4AbQBkAGMAZwBy
+AF8AbgBlAHcAAAAAACQnCgBuAG0AZAByAHMAdABfAG4AZQB3AAAAAABcJwoAbgBtAGQAcgB0AHMA
+XwBuAGUAdwAAAAAAACgKAG4AbQBkAG8AdwBuAF8AbgBlAHcAAAAAAGgoCwBuAG0AZABhAGYAcwBt
+AF8AbgBlAHcAAADgJwoAbgBtAGQAcgBjAGMAXwBuAGUAdwAAAAAArCcIAG4AbQBkAGwAXwBuAGUA
+dwAAAAAAfCgWAHYAdwBDAG8AbgBmAGkAZwBQAHIAbwBwAG8AcwBhAGwATgB1AG0AYgBlAHIAAAAA
+ABwoDQBUAFgAVABQAFIATwBQAE8AUwBBAEwATgBPAAAAzCoLAFQAWABUAEMATwBOAEYASQBHAFAA
+TgAAADAoBgAtADAAMAAwADAAMAAAAAAAXCgFAC0AMAAwADAAMAAAAPAoBAAtADAAMAAwAAAAAADk
+KwMALQAwADAAAADEKAIALQAwAAAAAABwKAEALQAAAEAsAgBTAEUAAAAAAJQoCABDAFMAQQBMAEUA
+UwBFAFgAAAAAAHgpFQBQAHIAbwBwAG8AcwBhAGwAIABOAHUAbQBiAGUAcgAgAEEAZABkAGUAZAAA
+AKwsEgB2AHcARABpAHMAYwBvAHUAbgB0AEMAYQB0AGUAZwBvAHIAeQAAAAAAGCkQAEcARQBUAEQA
+TwBDAFUATQBFAE4AVABCAFkASwBFAFkAAAAAANgpLABFAHIAcgBvAHIAIABpAG4AIAAnAFAAVwAg
+AFMAYQBuAHcAYQByAGUAJwAgAGMAbwBuAGYAaQBnAHUAcgBhAHQAaQBvAG4AIABkAG8AYwB1AG0A
+ZQBuAHQAAAAAADAtLABFAHIAcgBvAHIAIABJAG4AIAAnAEoAUAAgAFMAYQBuAHcAYQByAGUAJwAg
+AGMAbwBuAGYAaQBnAHUAcgBhAHQAaQBvAG4AIABkAG8AYwB1AG0AZQBuAHQAAAAAAEgqNABFAHIA
+cgBvAHIAIABJAG4AIAAnAEEAbABsAGkAZQBkACAAUAByAG8AZAB1AGMAdABzACAAUABXACcAIABj
+AG8AbgBmAGkAZwB1AHIAYQB0AGkAbwBuACAAZABvAGMAdQBtAGUAbgB0AAAAAABAKz4ARQByAHIA
+bwByACAASQBuACAAJwBQAFcAIABSAGEAbgBnAGUAIABvAGYAIABUAGEAcABzACAAYQBuAGQAIABG
+AGkAdAB0AGkAbgBnACcAIABjAG8AbgBmAGkAZwB1AHIAYQB0AGkAbwBuACAAZABvAGMAdQBtAGUA
+bgB0AAAAAACEMTcARQByAHIAbwByACAASQBuACAAJwBDAHIAZQBzAHQAaQBhACAAYwBvAG4AZgBp
+AGcAdQByAGEAdABpAG8AbgAnACAAYwBvAG4AZgBpAGcAdQByAGEAdABpAG8AbgAgAGQAbwBjAHUA
+bQBlAG4AdAAAALQyTwBFAHIAcgBvAHIAIABJAG4AIAAnAFIAbwBjAGEAIABTAGEAbgB3AGEAcgBl
+ACAAKwBTAGUAYQB0ACAAJgAgAEMAbwB2AGUAcgArACAAQwBvAG4AYwBlAGEAaQBlAGQAIABDAGkA
+cwB0AGUAcgBuACcAIABjAG8AbgBmAGkAZwB1AHIAYQB0AGkAbwBuACAAZABvAGMAdQBtAGUAbgB0
+AAAAbC4rAEUAcgByAG8AcgAgAEkAbgAgACcAUgBvAGMAYQAgAFQAYQBwAHMAJwAgAGMAbwBuAGYA
+aQBnAHUAcgBhAHQAaQBvAG4AIABkAG8AYwB1AG0AZQBuAHQAAADALTMARQByAHIAbwByACAASQBu
+ACAAJwBQAGEAcgByAHkAdwBhAHIAZQAgAFMAYQBuAHcAYQByAGUAJwAgAGMAbwBuAGYAaQBnAHUA
+cgBhAHQAaQBvAG4AIABkAG8AYwB1AG0AZQBuAHQAAADIMj8ARQByAHIAbwByACAASQBuACAAJwBQ
+AGEAcgByAHkAdwBhAHIAZQAgAEMAcgBlAHMAdABpAGEAIABTAGEAbgB3AGEAcgBlACAATwBXAE4A
+JwAgAGMAbwBuAGYAaQBnAHUAcgBhAHQAaQBvAG4AIABkAG8AYwB1AG0AZQBuAHQAAAB8L0QARQBy
+AHIAbwByACAASQBuACAAJwBQAGEAcgByAHkAdwBhAHIAZQAgAEMAcgBlAHMAdABpAGEAIABTAGEA
+bgB3AGEAcgBlACAAKABUAHIAYQBkAGUAZAApACcAIABjAG8AbgBmAGkAZwB1AHIAYQB0AGkAbwBu
+ACAAZABvAGMAdQBtAGUAbgB0AAAAAADcMFMARQByAHIAbwByACAASQBuACAAJwBBAGwAbABpAGUA
+ZAAgAC0AIABBAGwAbAAgAFAAYQByAHIAeQB3AGEAcgBlACAAUwBlAGEAdAAgACYAIABDAG8AdgBl
+AHIAcwAgAGEAbgBkACAAQwBpAHMAdABlAHIAbgBzACcAIABjAG8AbgBmAGkAZwB1AHIAYQB0AGkA
+bwBuACAAZABvAGMAdQBtAGUAbgB0AAAAEC9PAEUAcgByAG8AcgAgAEkAbgAgACcAQQBsAGwAaQBl
+AGQAIAAtACAARgB1AHIAbgBpAHQAdQByAGUALAAgAFMAaQBuAGsAcwAsACAATQBpAHIAcgBvAHIA
+cwAgACYAIABSAGUAcwB0ACAAQQBsAGwAJwAgAGMAbwBuAGYAaQBnAHUAcgBhAHQAaQBvAG4AIABk
+AG8AYwB1AG0AZQBuAHQAAAA0MTMARQByAHIAbwByACAASQBuACAAJwBQAGEAcgByAHkAdwBhAHIA
+ZQAgAEYAYQB1AGMAZQB0AHMAJwAgAGMAbwBuAGYAaQBnAHUAcgBhAHQAaQBvAG4AIABkAG8AYwB1
+AG0AZQBuAHQAAABkMC4ARQByAHIAbwByACAASQBuACAAJwBSAG8AYwBhACAAcwBhAG4AdwBhAHIA
+ZQAnACAAYwBvAG4AZgBpAGcAdQByAGEAdABpAG8AbgAgAGQAbwBjAHUAbQBlAG4AdAAAAAAApDE+
+AEUAcgADAPwP6C8AAHIAbwByACAASQBuACAAJwBSAG8AYwBhACAARgBhAHUAYwBlAHQAcwAgACsA
+IABTAGUAYQB0ACAAJgAgAEMAbwB2AGUAcgBzACcAIABjAG8AbgBmAGkAZwB1AHIAYQB0AGkAbwBu
+ACAAZABvAGMAdQBtAGUAbgB0AAAAAAAUNDgARQByAHIAbwByACAASQBuACAAJwBSAG8AYwBhACAA
+QwBvAG4AYwBlAGEAbABlAGQAIABDAGkAcwB0AGUAcgBuACcAIABjAG8AbgBmAGkAZwB1AHIAYQB0
+AGkAbwBuACAAZABvAGMAdQBtAGUAbgB0AAAAAAA4MigARQByAHIAbwByACAASQBuACAAJwBMAGEA
+dQBmAGUAbgAnACAAYwBvAG4AZgBpAGcAdQByAGEAdABpAG8AbgAgAGQAbwBjAHUAbQBlAG4AdAAA
+AAAAeDIkAEUAcgByAG8AcgAgAEkAbgAgACcASgBQACcAIABjAG8AbgBmAGkAZwB1AHIAYQB0AGkA
+bwBuACAAZABvAGMAdQBtAGUAbgB0AAAAAABgMg0ARQBOAEQASQBOAE4ARQBSAFcASABJAEwARQAA
+AIgyRgBFAHIAcgBvAHIAIABpAG4AIABtAGUAdABoAG8AZAAgAGMAYQBsAGMAdQBsAGEAdABlAEYA
+aQBuAGEAbABSAG8AdQB0AGUAcgAgAGkAbgAgAGEAbgAgAGEAZwBlAG4AdAAgAGEAZwBlAG4AdABQ
+AHIAbwBqAGUAYwB0AFIAZQBxAHUAZQBzAHQAOgAgAAAAAADgMxAAQwBBAEwAQwBVAEwAVABFAEYA
+SQBMAEUAUwBJAFoARQAAAAAAoDIIAEUATQBCAEUARABPAEIASgAAAAAAIDMFAEYASQBMAEUAUwAA
+APwzCQBGAEkATABFAEMATwBVAE4AVAAAAMQ0BgBKAFAARwBQAEQARgAAAAAA4DIGAFgATABUAFkA
+UABFAAAAAAD8MgkAUwBJAFoARQBDAEgARQBDAEsAAAA4NQsASABBAFMARQBNAEIARQBEAEQARQBE
+AAAAODMOAEYASQBMAEUAVABZAFAARQBKAFAARwBQAEQARgAAAAAAXDUIAEYASQBMAEUAUwBJAFoA
+RQAAAAAAyDNEAEUAcgByAG8AcgAgAGkAbgAgAGYAdQBuAGMAdABpAG8AbgAgAGMAYQBsAGMAdQBs
+AGEAdABlAEYAaQBsAGUAUwBpAHoAZQAgAGkAbgAgAGEAbgAgAGEAZwBlAG4AdAAgAGEAZwBlAG4A
+dABQAHIAbwBqAGUAYwB0AFIAZQBxAHUAZQBzAHQAIAAAAAAAbDQJAFIARQBNAE8AVgBFAFAAVwBG
+AAAAXDQLAFMAVQBCAE0ASQBUAFMAVABBAEcARQAAAKw0CQBBAFMATQBSAGUAdwBvAHIAawAAACw0
+CQBSAFMATQBSAGUAdwBvAHIAawAAAEg0CgBNAEsAVABHAFIAZQB3AG8AcgBrAAAAAACINAcAUgBU
+AEYASQBFAEwARAAAAFQ1BQByAHQAcAB3AGYAAACENwoAUgBFAE0ATwBWAEUASQBUAEUATQAAAAAA
+oDYOAEEAcABwAHIAbwB2AGUAZAAgAGIAeQAgAFYAUAAAAAAA9DQIAHYAcABBAHAARABhAHQAZQAA
+AAAA3DYUAEEAdwBhAGkAdABpAG4AZwAgAEEAcABwAHIAbwB2AGEAbAAtAE0ARAAAAAAA7DUeAEUA
+cgByAG8AcgAgAGkAbgAgAHYAcABBAHAAcAByAG8AdgBhAGwAIABmAHUAbgBjAHQAaQBvAG4AOgAg
+AAAAAADsOAoAYgB1AGYAZgBlAHIASQB0AGUAbQAAAAAAIDgBADsAAADAOEUARQByAHIAbwByACAA
+aQBuACAAZgB1AG4AYwB0AGkAbwBuACAAdQBwAGQAYQB0AGUAUgBlAGEAZABlAHIAUwB0AHIAaQBu
+AGcAIABpAG4AIABhAG4AIABhAGcAZQBuAHQAIABhAGcAZQBuAHQAUAByAG8AagBlAGMAdABSAGUA
+cQB1AGUAcwB0ACAAAAAQNg4AUgBlAHcAbwByAGsAZQBkACAAYgB5ACAAVgBQAAAAAABgNiUAQQB3
+AGEAaQB0AGkAbgBnACAATgBTAE0AIABhAHAAcAByAG8AdgBhAGwAIABBAGYAdABlAHIAIABWAFAA
+LQBSAGUAdwBvAHIAawAAAMQ2HABFAHIAcgBvAHIAIABpAG4AIABWAHAAUgBlAHcAbwByAGsAIABm
+AHUAbgBjAHQAaQBvAG4AOgAgAAAAAACcOA8AQQBwAHAAcgBvAHYAZQBkACAAYgB5ACAAQQBTAE0A
+AAD0NgkAYQBzAG0AQQBwAEQAYQB0AGUAAADANwkAUABSAEUAUwBUAEEAVABVAFMAAAAQNwsAYQBz
+AG0AYQBwAHAAcgBvAHYAZQBkAAAAQDcVAEEAdwBhAGkAdABpAG4AZwAgAEEAcABwAHIAbwB2AGEA
+bAAtAFIAUwBNAAAAnDcfAEUAcgByAG8AcgAgAGkAbgAgAGEAcwBtAEEAcABwAHIAbwB2AGEAbAAg
+AGYAdQBuAGMAdABpAG8AbgA6ACAAAAAIOgkAQQBTAE0AUgBFAFcATwBSAEsAAACoOA8AUgBlAHcA
+bwByAGsAZQBkACAAYgB5ACAAQQBTAE0AAADMNwMAMgAuADIAAAAkOScAQQB3AGEAaQB0AGkAbgBn
+ACAAUwBFACAAcwB1AGIAbQBpAHMAcwBpAG8AbgAgAGEAZgB0AGUAcgAgAEEAUwBNACAAUgBlAHcA
+bwByAGsAAABYOBgAdwBlAGIAZgByAG0ATgBlAHcAUAByAG8AagBlAGMAdABEAGkAcwBjAG8AdQBu
+AHQAAAAAANA4HwBFAHIAcgBvAHIAIABpAG4AIAByAHMAbQBBAHAAcAByAG8AdgBhAGwAIABmAHUA
+bgBjAHQAaQBvAG4AOgAgAAAAXDkDAFMATgBPAAAARDkJAFUAUwBFAFIATgBBAE0ARQBTAAAAzDkF
+AEQAQQBUAEUAUwAAAAw5CgBBAEMAVABJAFYASQBUAEkARQBTAAAAAACwOQ0AVABPAFQAQQBMAEUA
+TABFAE0ARQBOAFQAUwAAADg6CABTAE4ATwBBAFIAUgBBAFkAAAAAAIw5DABDAFUAUgBSAFUAUwBF
+AFIATgBBAE0ARQAAAAAA5DkJAE4ATwBUAEUAUwBOAEEATQBFAAAAdDkIAEMAVQBSAFIAVQBTAEUA
+UgAAAAAArDoJAEwATwBHAFUAUABEAEEAVABFAAAAVDoPAGwAbwBnACAAaQBuAGkAdABpAGEAbABp
+AHoAZQBkAAAA9DsKAEMAUgBFAEEAVABFAE4AQQBNAEUAAAAAANQ6CQBJAFMATgBFAFcATgBPAFQA
+RQAAALg6DwBBAFUARABJAFQAXwBTAE4ATwBfAEYASQBFAEwARAAAABw9FABBAFUARABJAFQAXwBV
+AFMARQBSAE4AQQBNAEUAXwBGAEkARQBMAEQAAAAAAHw6CwBBAEIAQgBSAEUAVgBJAEEAVABFAEQA
+AACAOxAAQQBVAEQASQBUAF8ARABBAFQARQBfAEYASQBFAEwARAAAAAAAmDsUAEEAVQBEAEkAVABf
+AEEAQwBUAEkAVgBJAFQAWQBfAEYASQBFAEwARAAAAAAAyDoDAGoAcABnAAAAXDsEAGoAcABlAGcA
+AAAAANw7AwBwAGQAZgAAAKg7QQBFAHIAcgBvAHIAIABpAG4AIABmAHUAbgBjAHQAaQBvAG4AIABG
+AGkAbABlAFQAeQBwAGUASgBwAGcAUABkAGYAIABpAG4AIABhAG4AIABhAGcAZQBuAHQAIABhAGcA
+ZQBuAHQAUAByAG8AagBlAGMAdABSAGUAcQB1AGUAcwB0ACAAAADMPQ8AUgBFAEEARABFAFIATgBP
+AFQARQBTAE4AQQBNAEUAAAAkPAkAQwBBAE4ATwBOAEkAQwBBAEwAAACMPwUATwBMAEQARgBSAAAA
+uDsFAE4ARQBXAEYAUgAAAFA9DwBBAHAAcAByAG8AdgBlAGQAIABiAHkAIABOAFMATQAAAGg8CQBu
+AHMAbQBBAHAARABhAHQAZQAAAIw8FABBAHcAYQBpAHQAaQBuAGcAIABBAHAAcAByAG8AdgBhAGwA
+LQBWAFAAAAAAANw8HwBFAHIAcgBvAHIAIABpAG4AIABuAHMAbQBBAHAAcAByAG8AdgBhAGwAIABm
+AHUAbgBjAHQAaQBvAG4AOgAgAAAAuD0PAFIAZQB3AG8AcgBrAGUAZAAgAGIAeQAgAE4AUwBNAAAA
+iD0lAEEAdwBhAGkAdABpAG4AZwAgAFUAcABsAG8AYQBkAC0ATQBLAFQARwAgAEEAZgB0AGUAcgAg
+AE4AUwBNAC0AUgBlAHcAbwByAGsAAABwPR0ARQByAHIAbwByACAAaQBuACAAcgBzAG0AUgBlAHcA
+bwByAGsAIABmAHUAbgBjAHQAaQBvAG4AOgAgAAAAPD0MAFUAUABEAEEAVABFAFIARQBBAEQARQBS
+AAAAAADwPQcAUgBFAEEARABFAFIAUwAAAJw9DQBEAE8AQwBSAEUAQQBEAEUAUgBJAFQARQBNAAAA
+BD4JAE4ATwBUAEUAUwBJAFQARQBNAAAApD8GAEIAVQBGAEYARQBSAAAAAAAcQQsAUgBFAEEARABF
+AFIAQQBSAFIAQQBZAAAAfEEHAEkATgBJAFMASQBaAEUAAAA4Pw4ARABvAGMAdQBtAGUAbgB0AFIA
+ZQBhAGQAZQByAAAAAAAcPgYAUgBFAEEARABFAFIAAAAAAKA+CQBJAFMAUgBFAEEARABFAFIAUwAA
+AFQ/PwBFAHIAcgBvAHIAIABpAG4AIABmAHUAbgBjAHQAaQBvAG4AIAB1AHAAZABhAHQAZQBSAGUA
+YQBkAGUAcgAgAGkAbgAgAGEAbgAgAGEAZwBlAG4AdAAgAGEAZwBlAG4AdABQAHIAbwBqAGUAYwB0
+AFIAZQBxAHUAZQBzAHQAIAAAAMA+DABHAEUAVABMAE8ATwBLAFUAUABEAE8AQwAAAAAAJEA5AEUA
+cgByAG8AcgAgAGkAbgAgAHQAYQBrAGkAbgBnACAAaABhAGQAbABlACAAbwBmACAAYQByAGUAYQAg
+AGMAbwBuAGYAaQBnAHUAcgBhAHQAaQBvAG4AIABkAG8AYwB1AG0AZQBuAHQALgAuAC4ALgAhAAAA
+cD8KAEcARQBUAFIAUwBNAE4AQQBNAEUAAAAAAPA/CwBHAEUAVABNAEsAVABHAE4AQQBNAEUAAAC8
+PwoARwBFAFQATgBTAE0ATgBBAE0ARQAAAAAAhEAJAEcARQBUAFYAUABOAEEATQBFAAAA1D8JAEcA
+RQBUAE0ARABOAEEATQBFAAAAQEAJAEcARQBUAEwARQBOAEEATQBFAAAADEAKAEcARQBUAFIAAwDg
+CeA/AABMAE0ATgBBAE0ARQAAAAAANEEKAEcARQBUAFIAQQBNAE4AQQBNAEUAAAAAANBBCABTAEUA
+UwB1AGIAbQBpAHQAAAAAANBACgBTAEUAUgBlAHMAdQBiAG0AaQB0AAAAAABsQBIAUwBFAFIARQBT
+AFUAQgBNAEkAVABEAE8AQwBVAE0ARQBOAFQAAAAAAOxACQBBAFMATQBTAHUAYgBtAGkAdAAAAJxA
+CQBSAFMATQBTAHUAYgBtAGkAdAAAALRACQBSAFMATQBSAEUAVwBPAFIASwAAAExBCgBNAEsAVABH
+AFMAdQBiAG0AaQB0AAAAAAAEQQoATQBLAFQARwBSAEUAVwBPAFIASwAAAAAAlEEJAE4AUwBNAFMA
+dQBiAG0AaQB0AAAAWEIJAE4AUwBNAFIAZQB3AG8AcgBrAAAAlEMIAFYAUABTAHUAYgBtAGkAdAAA
+AAAADEIIAFYAUABSAGUAdwBvAHIAawAAAAAAZEEIAE0ARABTAHUAYgBtAGkAdAAAAAAAUEMIAE0A
+RABSAGUAdwBvAHIAawAAAAAA9EEIAEwARQBTAHUAYgBtAGkAdAAAAAAA+EIbAEUAcgByAG8AcgAg
+AGkAbgAgAEEAcABwAHIAbwB2AGUAIABmAHUAbgBjAHQAaQBvAG4AOgAgAAAAKEIPAEEAcABwAHIA
+bwB2AGUAZAAgAGIAeQAgAFIAUwBNAAAA2EMJAHIAcwBtAEEAcABEAGEAdABlAAAAKEMLAHIAcwBt
+AGEAcABwAHIAbwB2AGUAZAAAAHxCFABBAHcAYQBpAHQAaQBuAGcAIABVAHAAbABvAGEAZAAtAE0A
+SwBUAEcAAAAAAIhCDwBSAGUAdwBvAHIAawBlAGQAIABiAHkAIABSAFMATQAAANxCAwAzAC4AMQAA
+ABhFJwBBAHcAYQBpAHQAaQBuAGcAIABTAEUAIABzAHUAYgBtAGkAcwBzAGkAbwBuACAAQQBmAHQA
+ZQByACAAUgBTAE0ALQBSAGUAdwBvAHIAawAAAJhECgBtAGsAdABnAEEAcABEAGEAdABlAAAAAADA
+RBUAQQB3AGEAaQB0AGkAbgBnACAAQQBwAHAAcgBvAHYAYQBsAC0ATgBTAE0AAABQRRAAVQBwAGwA
+bwBhAGQAZQBkACAAYgB5ACAATQBLAFQARwAAAAAAAEYeAEUAcgByAG8AcgAgAGkAbgAgAG0AawB0
+AGcAVQBwAGwAbwBhAGQAIABmAHUAbgBjAHQAaQBvAG4AOgAgAAAAAAC4Qw8AQQBVAFQASABPAFIA
+TgBPAFQARQBTAE4AQQBNAEUAAAAURA0ARABPAEMAQQBVAFQASABPAFIASQBUAEUATQAAAPxDDgBE
+AG8AYwB1AG0AZQBuAHQAQQB1AHQAaABvAHIAAAAAAPRFCQBJAFMAQQBVAFQASABPAFIAUwAAAHRF
+PwBFAHIAcgBvAHIAIABpAG4AIABmAHUAbgBjAHQAaQBvAG4AIAB1AHAAZABhAHQAZQBBAHUAdABo
+AG8AcgAgAGkAbgAgAGEAbgAgAGEAZwBlAG4AdAAgAGEAZwBlAG4AdABQAHIAbwBqAGUAYwB0AFIA
+ZQBxAHUAZQBzAHQAIAAAACRFEABSAGUAdwBvAHIAawBlAGQAIABiAHkAIABNAEsAVABHAAAAAABg
+RigAQQB3AGEAaQB0AGkAbgBnACAAUwBFACAAUwB1AGIAbQBpAHMAcwBpAG8AbgAgAEEAZgB0AGUA
+cgAgAE0ASwBUAEcALQBSAGUAdwBvAHIAawAAAAAAoEYCAE4AbwAAAAAAiEcSAFIAZQBzAHUAYgBt
+AGkAdAB0AGUAZAAgAEIAeQAgACAAUwBFAAAAAACMRQ4AQQBwAHAAcgBvAHYAZQBkACAAYgB5ACAA
+TQBEAAAAAAC0RggAbQBkAEEAcABEAGEAdABlAAAAAADQRR4ARQByAHIAbwByACAAaQBuACAAbQBk
+AEEAcABwAHIAbwB2AGEAbAAgAGYAdQBuAGMAdABpAG8AbgA6ACAAAAAAAFBGDgBSAGUAdwBvAHIA
+awBlAGQAIABiAHkAIABNAEQAAAAAAIxGAwA3AC4AMQAAAHRGJQBBAHcAYQBpAHQAaQBuAGcAIABO
+AFMATQAgAEEAcABwAHIAbwB2AGEAbAAgAEEAZgB0AGUAcgAgAE0ARAAtAFIAZQB3AG8AcgBrAAAA
+MEcFAEQARQBCAFUARwAAAGRHBgBTAEUATgBEAEUAUgAAAAAAxEgIAFMAQQBMAEUAUwBFAFgARQAA
+AAAAOEcGAFMAVABBAEcARQAxAAAAAADMRwYASwBFAFkAVgBBAEwAAAAAAERHOgBFAHIAcgBvAHIA
+IABpAG4AIAB0AGEAawBpAG4AZwAgAGgAYQBuAGQAbABlACAAbwBmACAAYQByAGUAYQAgAGMAbwBu
+AGYAaQBnAHUAcgBhAHQAaQBvAG4AIABkAG8AYwB1AG0AZQBuAHQALgAuAC4ALgAhAAAAAADwRwEA
+OQAAADBIAgAtADEAAAAAAExJDABSAGUAagBlAGMAdABlAGQALQBBAFMATQAAAAAAEEgPAFIAZQBq
+AGUAYwB0AGUAZAAgAGIAeQAgAEEAUwBNAAAArEcOAFIARQBKAEUAQwBUAFMARQBOAEQATQBBAEkA
+TAAAAAAAkEgMAFIAZQBqAGUAYwB0AGUAZAAtAFIAUwBNAAAAAABUSA8AUgBlAGoAZQBjAHQAZQBk
+ACAAYgB5ACAAUgBTAE0AAADwSA0AUgBlAGoAZQBjAHQAZQBkAC0ATQBLAFQARwAAAP//DABSAGUA
+agBlAGMAdABlAGQALQBOAFMATQAAAAAA//8PAFIAZQBqAGUAYwB0AGUAZAAgAGIAeQAgAE4AUwBN
+AAAAlEkaAEUAcgByAG8AcgAgAGkAbgAgAFIAZQBqAGUAYwB0ACAAZgB1AG4AYwB0AGkAbwBuADoA
+IAAAAAAALEkWAE4ATwBUAEUAUwBSAEkAQwBIAFQARQBYAFQATgBBAFYASQBHAEEAVABPAFIAAAAA
+AP//EgBOAE8AVABFAFMAUgBJAEMASABUAEUAWABUAFMAVABZAEwARQAAAAAAdEkbAE4ATwBUAEUA
+UwBSAEkAQwBIAFQARQBYAFQAUABBAFIAQQBHAFIAQQBQAEgAUwBUAFkATABFAAAA//8MAHQAeAB0
+AEEAdQBkAGkAdABfAFMATgBvAAAAAAD//xEAdAB4AHQAQQB1AGQAaQB0AF8AVQBzAGUAcgBOAGEA
+bQBlAAAA//8NAHQAeAB0AEEAdQBkAGkAdABfAEQAYQB0AGUAAAD//xEAdAB4AHQAQQB1AGQAaQB0
+AF8AQQBjAHQAaQB2AGkAdAB5AAAADQAIAAAAAAA4OgAABQD8DwAAAABm2a/SGAAAAAAAqABonoAH
+OAk8CgQAAAAYAAAABADkAHjygAc4CTwKGAAAABgAAAAYACgBaOKABzgJPAosAAAAGgAAAOwC//8A
+AAAAEAAAAAACiB3MAgAAAAAAAAEAAACULJQsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJQs
+lCwAAAAAAAAAAAAAAAAAAAAAAAAAAAIUEyntLmkQv10A3QERhrcAAAAAAAAAAAAAAAAAAAAAZAAA
+AAAAAAAAAAAAAAAAAAIAQADcAAAAAAAAAAIAAQD//wAAEgAUAAAAAAD//wkCAAAAABIEAAAAAEwA
+QAD//wAAAAAGAAMAAAAJAkwACQJMAAYIBggZAAMAEAAgAUABvAIJAgAATAADABAAMAEwAQADBgAE
+AAAAAwAQAEABBAMcAwYACAAAAAMAEABQAVgEPAMGAAwAAAADABAAYAF4A2ADBgAQAAAAAwAQAHAB
+9AJsAwYAFAAAAAMAEACAAZABgAMGABgAAAADABAAkAHUApgDBgAcAAAAAwAQAKAB4AGsAwYAIAAA
+AAMAEACwAfABwAMGACQAAAADABAAwAG4BNQDBgAoAAAAAwAQANABuAPoAwYALAAAAAMAEADgASQD
+/AMGADAAAAADABAA8AE4BRAEBgA0AAAAAwAQAMQCFAMkBAYAOAAAABAABAAQBqgMWAQAAAAAAAAK
+AAAAhC2ENAAAAAAwLjAuhC0oMbgxhDSIMYgxtDO0MwAAAAAAAAAAAAAAAAAuAC4AAAAAuC24LVAz
+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
+AAAAAAAABAACADgU6BXcHgYAAAAAAAgfAAAAAAAAAAAAAAAAAAAEAAIAWBRYFCQfBgAAAAAAUB8A
+AAAAAAAAAAAAAAAAAAQAAgB4FNgUbB8GAAAAAACUHwAAAAAAAAAAAAAAAAAABAACAJgUmBSwHwYA
+AAAAANgfAAAAAAAAAAAAAAAAAAAEAAIAuBSYFfQfBgAAAAAAECAAAAAAAAAAAAAAAAAAAAQAAgDY
+FPgUJCAGAAAAAABIIAAAAAAAAAAAAAAAAAAABAACAPgUSBVkIAYAAAAAAJQgAAAAAAAAAAAAAAAA
+AAADAAIACBUAALQgBgB4CAAAAwACABgVAADgIAYAfAgAAAMAAgAoFcgVDCEGAIAIAAADAAIAOBV4
+FTghBgCECAAAAwACAEgVqBVkIQYAiAgAAAMAAgBYFYgVkCEGAIwIAAADAAIAaBUAALwhBgCQCAAA
+AwACAHgVCBboIQYAlAgAAAMAAgCIFQAAHCIGAJgIAAADAAIAmBUAAFAiBgCcCAAAAwACAKgVuBWE
+IgYAoAgAAAMAAgC4FfgVuCIGAKQIAAADAAIAyBXYFewiBgCoCAAAAwACANgVAAAgIwYArAgAAAMA
+AgDoFRgWVCMGALAIAAADAAIA+BUAAIgjBgC0CAAAAwACAAgWAAC8IwYAuAgAAAMAAgAYFgAA8CMG
+ALwIAAADAAIAAAAAAHQoBgDQCAAADQAIADgWOBaIMQAAcx4ZAA0ACAAAAAAASAoAAHEfGQAHABAA
+cBdwFzwyAAAAAAAACAAAAOAWUBcgFyAXABcAFwAAAAAAAAAAMBcwFwAAAADwFvAW4BbgFkAXQBcQ
+FxAXAAAAAFAXUBcAAAAAAQAAAAsAAACOHwAAYAAAAAEAAABgF2AXYBdgFwAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAQDwFgAAPDIAAAAAAAADAAEAABcA
+AJgBCQIBAAACAwACABAXAABkMgkCAAD4CwMAAgAgFwAAfDIAAAgAAAADAAIAMBcAAIwyAQAYAAAA
+AwACAEAXAACkMg0AGgAAAAMAAgBQFwAAuDINABwAAAADAAIAAAAAAMwyDQAeAAAADQAIAAAAAABI
+CgAAzCAZAAcAEAA4GAAAzDMAAAAAAAADAAAACBgoGAAAAAAYGBgYAAAAAAAAAAAAAAAAAAAAAAAA
+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
+AAA0JjQmNCY0JgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAMAAQAkJgAAoEAAAAAAAAADAAEAAAAAAFABCQIBAAACDQAIAAAAAABICgAAMjIZAAcAEAAMJ2wq
+0A4AAAAAAAACAAAA3CbsJgAAAADsJuwmAAAAAAAAAAAAAAAAAAAAANwm3CYAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAABAAAAEQAAAFIyAAAQAAAAAQAAAPwm/Cb8JvwmAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwABAOwmAADQDgAAAAAAAAMAAQAAAAAAUAEJ
+AgEAAAINAAgAAAAAAEgKAAALMxkABwAQABQoAADsEAAAAAAAAAYAAACkJ/QnAAAAAMQnxCcAAAAA
+AAAAALQntCcAAAAAAAAAAAAAAACkJ/QnAAAAAOQn5CcAAAAAAAAAAAIAAAASAAAAKzMAABwAAAAB
+AAAABCgEKAQoBCgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAADAAEAtCfUJ+wQAAAAAAAAAwABAMQnAACgAgYAAQAAAAMAAQDUJwAAhAIJAgIAAAIDAAIA5Cf0
+J+gICQIAABAGAwACAPQnAACYQwkCBACIHQMAAgAAAAAAvEMJAggAtCINAAgAAAAAAEgKAACKMxkA
+BwAQANwoNCvUQAAAAAAAAAIAAACsKLwoAAAAALwovCgAAAAAAAAAAKworCgAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAARAAAArjMAABAAAAABAAAAzCjMKMwozCgAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAEAvCgAANRAAAAAAAAAAwAB
+AAAAAABQAQkCAQAAAg0ACAAAAAAASAoAALc0GQAHABAApCkAAERAAAAAAAAAAgAAAHQphCkAAAAA
+dCmEKQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAABEAAADX
+NAAAEAAAAAEAAACUKZQplCmUKQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+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
+A0sYGFOoM4UlfQA0uEsYGFOoM4UlfRg0uMNLGBhTqDOFJX0wNLjDOCYAGtQDXigYfWA0pRrVA0sY
+GCy0M31gNCMa1gNLGBgsMC6EhYsCIzEa1wMa2AMdGuIDCwAAAAAJOqsBGuMDKUAcXeAYfYw0W5AB
+IzEa5ANL4BgshC19sDQGLJojMRrlA0cgAZMGV5NHMAGTBleTuDj4ABrmAykICl3gGFuQASMxGucD
+KQAZKUQfW9ABI13gGCMxGugDKQAZKUQfW2ABI13gGCMxGukDKQAZKUQfW3ABI13gGCMxGuoDKQAZ
+KUQfW4ABI13gGCMxGusDKQAZKUQfW5ABI13gGCMxGuwDKQAZKUQfW8ABI13gGCMxGu4DKaAuXeAY
+fYAAW9ABW5ABIzEa7wMpoC5d4Bh9gABbYAFbkAEjMRrwAymgLl3gGH2AAFtwAVuQASMxGvEDKaAu
+XeAYfYAAW4ABW5ABIzEa8gMpoC5d4Bh9gABbkAFbkAEjMRrzAymgLl3gGH2AAFvAAVuQASMxGvQD
+OngAGvYDKQAZKUQfW6ABI13gGCMxGvcDKQAZKUQfW5ABI13gGCMxGvgDS+AYLIQtfRQFfXwPIzEa
++QNL4BgshC19jAZ9yDQjMRr7A1v0AkegAaUa/ANL4BgshC19TAdboAEjMRr9AymgLl3gGFugAX2A
+AFuQASMxGv4DGv8DHBoABBoBBH34NBaTrH3wDawVm6ybgIAGBxoCBBwaAwQdGg8ECwAAAAAJOnwA
+GhEEW+QCS7gZLLgtfTw1I4VkAZulGhMER+QCkwZXk32AALs4JgAaFARJqBmTBleTfYAAuzgPAFvk
+AkfkAn1YNahJqBmopRoVBDobABoWBEmoGZMGV5N9gAC7OAcAW+QCSagZpRoXBBoZBEu4GSyELX08
+NVvkAiMxGhsEHBocBBodBH1gNRaTrH0UFawVm6x9PBWsFJusPwEaHgQcGh8EHRopBAsAAAAACTqK
+ABorBClAHF2AGn3wNVuQASMxGi0EKQAZKUQfW4ABI12AGiMxGi4EKQAZKUQfW5ABI12AGiMxGi8E
+S4AaLIQtfRQFfaAPIzEaMARLgBoshC19jAZ9FDYjMRoyBFv0AkeAAaUaMwRLgBoshC19TAdbgAEj
+MRo1BCmgLl2AGluAAX2AAFuQASMxGjcEHBo4BBo5BH1kNhaTrH3wDawVm6ybgIAGBxo6BBwaOwQd
+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
+</rawitemdata></item>
+<item name='$AssistVersion'><datetime>20150428T200955,90+0530</datetime></item></note>
+
