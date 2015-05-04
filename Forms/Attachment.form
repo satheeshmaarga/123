@@ -67,7 +67,7 @@ AAAACgAAAA==
 <item name='$Fields'><textlist><text>H</text><text>Y</text><text>N</text><text
 >Untitled</text><text>popopo</text></textlist></item>
 <item name='$$ScriptName' summary='false' sign='true'><text>Attachment</text></item>
-<item name='$Body' sign='true'>
+<item name='$Body' sign='false'>
 <rawitemdata type='1'>
 gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAABAAAAAJSHAAAAAAAAAAAAAAAAAQAAAAQAAACDBAEAhf8IAAEAAAqBAoMEAQCF/wgA
